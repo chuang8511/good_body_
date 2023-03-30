@@ -25,7 +25,7 @@ RSpec.describe V1::TestApi, type: :request do
                 post path, params: params[false]
                 parsed = JSON.parse(response.body)
                 expect(parsed["test"]).to eq "1"
-                expect(parsed["context"]).to eq("It is a false context")
+                expect(parsed["context"]).to eq("It is a fale context")
             end
         end
     end
