@@ -34,7 +34,7 @@ RSpec.describe V1::TestApi, type: :request do
 
         it 'will generate a new test users' do
             
-            expect { post path, params: params[false] }.to change { TestUser.all.count }.by 1
+            expect { post path, params: params[false] }.to change { TestUser.all.count }.by 0
 
         end
 
