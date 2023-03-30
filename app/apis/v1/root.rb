@@ -6,6 +6,7 @@ module V1
     format :json
     content_type :json, 'application/json'
 
+    mount V1::TestApi
 
   end
 
