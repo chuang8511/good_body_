@@ -1,0 +1,32 @@
+name: RSpec
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby environment
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.0
+
+      - name: Install PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
+
+      - name: Create test database
+        run: |
+          psql -U postgres -c "CREATE DATABASE good_body_test"
+
+      - name: Run tests
+        run: |
+          bundle install
+          bundle exec rspec
+
+      - name: Drop test database
+        run: psql -U postgres -c "DROP DATABASE myapp_test"
