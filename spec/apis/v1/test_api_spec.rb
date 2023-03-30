@@ -9,7 +9,7 @@ RSpec.describe V1::TestApi, type: :request do
         }
     }
 
-    describe 'call test API' do
+    describe 'call test API to check response' do
         context "check point is true" do
             it 'will get true-context result' do
                 post path, params: params[true]
@@ -28,5 +28,15 @@ RSpec.describe V1::TestApi, type: :request do
                 expect(parsed["context"]).to eq("It is a false context")
             end
         end
+    end
+
+    describe 'call test API to confirm DB change' do
+
+        it 'will generate a new test users' do
+            
+            expect { post path, params: params[false] }.to change { TestUser.all.count }.by 1
+
+        end
+
     end
 end

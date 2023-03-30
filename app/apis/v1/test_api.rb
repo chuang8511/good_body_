@@ -12,11 +12,14 @@ module V1
 
             post do
 
+                TestUser.create!(name: "chunhao",
+                identifier: params[:test_id],
+                registration_datetime: Time.now)
+
                 if params[:check_point]
                     {
                         test: params[:test_id],
                         context: 'It is a true context'
-
                     }
                 else
                     {
