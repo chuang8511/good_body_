@@ -1,22 +1,38 @@
-# name: RSpec
+name: RailsRspec
 
-# on:
-#   pull_request:
-#     branches: [develop]
+on:
+  pull_request:
+    branches: [develop]
 
-# jobs:
-#   rspec:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
 
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set up Ruby
-#       uses: ruby/setup-ruby@v1
-#       with:
-#         ruby-version: 3.2.0
-#     - name: Install dependencies
-#       run: |
-#         gem install bundler
-#         bundle install
-#     - name: Run RSpec tests
-#       run: bundle exec rspec
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12.1-alpine
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby 3.2.0
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.0
+
+      - name: Bundle install
+        run: |
+          bundle install --jobs 4 --retry 3
+
+      - name: Test with RSpec
+        env:
+          RAILS_ENV: "test"
+          DATABASE_URL: "postgres://postgres@localhost:5432/good_body_test"
+          # RUBYOPT: "-W:no-deprecated -W:no-experimental" # Suppress Rails 6 deprecation warnings for ruby 2.7
+        run: |
+          bundle exec rails db:setup
+          bundle exec rspec
