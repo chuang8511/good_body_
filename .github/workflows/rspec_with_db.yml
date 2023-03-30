@@ -35,9 +35,9 @@ jobs:
 
       - name: Create test database
         run: |
-          psql -c 'CREATE DATABASE good_body_test;' -h localhost -p 5432
-          psql -c "CREATE USER good_body_user WITH PASSWORD 'myapp_password';" -h localhost -p 5432 -U postgres
-          psql -c "GRANT ALL PRIVILEGES ON DATABASE good_body_test TO good_body_user;" -h localhost -p 5432 -U postgres
+          psql -c 'CREATE DATABASE good_body_test;' -h localhost -p 5432 -W myapp_password
+          psql -c "CREATE USER good_body_user WITH PASSWORD 'myapp_password';" -h localhost -p 5432 -U postgres -W myapp_password
+          psql -c "GRANT ALL PRIVILEGES ON DATABASE good_body_test TO good_body_user;" -h localhost -p 5432 -U postgres -W myapp_password
 
       - name: Run RSpec tests
         run: |
