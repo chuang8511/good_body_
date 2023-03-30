@@ -3,7 +3,9 @@ name: RSpec Tests
 on:
   pull_request:
     branches: [develop]
-
+  push:
+    branches-ignore:
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
