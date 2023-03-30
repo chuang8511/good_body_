@@ -7,42 +7,37 @@ on:
     branches-ignore:
       - develop
 jobs:
-  build:
+  rspec:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:latest
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: good_body_user
-          POSTGRES_PASSWORD: myapp_password
-          POSTGRES_DB: good_body_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: myapp_test
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2.0'
-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-
-      - name: Create test database
-        run: |
-          psql -c 'CREATE DATABASE good_body_test;' -h localhost -p 5432 -W myapp_password
-          psql -c "CREATE USER good_body_user WITH PASSWORD 'myapp_password';" -h localhost -p 5432 -U postgres -W myapp_password
-          psql -c "GRANT ALL PRIVILEGES ON DATABASE good_body_test TO good_body_user;" -h localhost -p 5432 -U postgres -W myapp_password
-
-      - name: Run RSpec tests
-        run: |
-          bundle exec rspec
-      
-      - name: Drop test database
-        run: |
-          psql -c 'DROP DATABASE good_body_test;' -h localhost -p 5432
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 3.0
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.0
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+    - name: Create and setup test database
+      run: |
+        psql -c 'CREATE DATABASE myapp_test;' -U postgres -h localhost -p 5432
+        psql myapp_test < db/structure.sql
+    - name: Run RSpec tests
+      env:
+        RAILS_ENV: test
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/myapp_test
+      run: |
+        bundle exec rspec spec
