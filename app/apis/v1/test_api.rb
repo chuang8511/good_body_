@@ -4,7 +4,7 @@ module V1
 
         resource :test do
 
-
+            #test
             params do
                 requires :test_id, type: String
                 requires :check_point, type: Boolean
@@ -21,6 +21,7 @@ module V1
                         test: params[:test_id],
                         context: 'It is a true context'
                     }
+
                 else
                     {
                         test: params[:test_id],
