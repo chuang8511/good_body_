@@ -19,13 +19,14 @@ RSpec.describe V1::RegisterAccountApi, type: :request do
   invalid_test_mail = "eddie123gmail.com"
 
   describe "創建帳戶" do
+
     it "輸入新用戶資料，創建帳戶成功" do
       User.create!(account: "zzz",phone_number: "0973006502",email: "eddie@gmail.com",password: "23")
       total_user_number_expected = User.all.count+1
 
       post path, params: params[test_account1, valid_test_phone_number1, test_mail1]
       expect(User.all.count).to eq total_user_number_expected
-      p response
+      #p response
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "創建帳戶成功"
     end
@@ -37,12 +38,12 @@ RSpec.describe V1::RegisterAccountApi, type: :request do
       expect(parsed["context"]).to eq "必填欄位空白"
 
       #沒填手機
-      post path, params: {account: test_account1,phone_number: "",email: test_mail1}
+      post path, params: params[test_account1, "", test_mail1]
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "必填欄位空白"
 
       #沒填mail
-      post path, params: {account: test_account1,phone_number: valid_test_phone_number1,email: ""}
+      post path, params: params[test_account1, valid_test_phone_number1, ""]
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "必填欄位空白"
 
@@ -50,8 +51,8 @@ RSpec.describe V1::RegisterAccountApi, type: :request do
     end
 
     it "輸入的郵件已存在，創建帳戶失敗" do
-      post path, params: {account: test_account1,phone_number: valid_test_phone_number1,email: test_mail1}
-      post path, params: {account: test_account2,phone_number: valid_test_phone_number2,email: test_mail1}
+      post path, params: params[test_account1, valid_test_phone_number1, test_mail1]
+      post path, params: params[test_account2, valid_test_phone_number2, test_mail1]
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "郵件已存在"
     end
@@ -63,27 +64,29 @@ RSpec.describe V1::RegisterAccountApi, type: :request do
     end
 
     it "帳號已存在，創建帳戶失敗" do
-      post path, params: {account: test_account1,phone_number: valid_test_phone_number1,email: test_mail1}
-      post path, params: {account: test_account1,phone_number: valid_test_phone_number2,email: test_mail2}
+      post path, params: params[test_account1, valid_test_phone_number1, test_mail1]
+      post path, params: params[test_account1, valid_test_phone_number2, test_mail2]
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "帳號已存在"
     end
 
     it "手機號碼已存在，創建帳戶失敗" do
-      post path, params: {account: test_account1,phone_number: valid_test_phone_number1,email: test_mail1}
-      post path, params: {account: test_account2,phone_number: valid_test_phone_number1,email: test_mail2}
+      post path, params: params[test_account1, valid_test_phone_number1, test_mail1]
+      post path, params: params[test_account2, valid_test_phone_number1, test_mail2]
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "手機號碼已存在"
     end
 
     it "手機號碼格式錯誤，創建帳戶失敗" do
-      post path, params: {account: test_account1,phone_number: invalid_phone_number,email: test_mail1}
+      #號碼長度不是10
+      post path, params: params[test_account2, phone_number_with_wrong_length, test_mail2]
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "手機號碼格式錯誤"
     end
 
     it "這不是有效的手機號碼，創建帳戶失敗" do
-      post path, params: {account: test_account1,phone_number: phone_number_with_wrong_length,email: test_mail1}
+      #不是以09開頭
+      post path, params: params[test_account2, invalid_phone_number, test_mail2]
       parsed = JSON.parse(response.body)
       expect(parsed["context"]).to eq "這不是有效的手機號碼"
     end
