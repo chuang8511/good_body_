@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe V1::RegisterAccountApi, type: :request do
+  let(:path) { '/v1/create_account' }
+  
   describe "創建帳戶" do
     it "輸入新用戶資料，創建帳戶"
     user=User.new
