@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe V1::TestApi, type: :request do
-
+    #下面這是啥
     let(:path) { '/v1/test' }
     let(:params) {
         -> (boolean) {
             { test_id: "1", check_point: boolean }
         }
     }
-
+##不理解測試的邏輯
     describe 'call test API to check response' do
         context "check point is true" do
             it 'will get true-context result' do
