@@ -9,7 +9,7 @@ module V1 # define a module named V1
             end
             
             post do # define the post method for the login endpoint.
-                user = User.find_by(account: params[:account])
+                user = UserLogin.find_by(account: params[:account]) # Match model file's name with controller
                 if user&.authenticate(params[:password])
                   { status: 'success', user_id: user.id }
                 else
@@ -18,6 +18,5 @@ module V1 # define a module named V1
             end
 
         end
-        #mount V1::LoginApi
       end
   end
