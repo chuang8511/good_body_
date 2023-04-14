@@ -12,6 +12,7 @@ module V1
 
             post do
 
+                # test
                 TestUser.create!(name: "chunhao",
                 identifier: params[:test_id],
                 registration_datetime: Time.now)
