@@ -18,29 +18,30 @@ class LoginUser
   private
 
   def no_user_found!
-    raise NoUserError if user.blank?
+    raise NoUserError.new(account_number) if user.blank?
   end
 
   def password_is_wrong!(password)
-    raise WrongPasswordError if user.password != password # I do not consider the security here. Please think about how to make it better.
+    raise WrongPasswordError.new if user.password != password # I do not consider the security here. Please think about how to make it better.
   end
 
   def succeed_to_login
     @is_login = true
   end
 
-  class NoUserError < StandardError
-    def initialize(merchant_no)
-      msg = "There is no #{account_number} user"
-      super(msg)
-    end
-  end
+end
 
-  class WrongPasswordError < StandardError
-    def initialize(merchant_no)
-      msg = "There is no #{account_number} user"
-      super(msg)
-    end
+# todo: It would be better to arrange in another place.
+class NoUserError < StandardError
+  def initialize(account_number)
+    msg = "There is no #{account_number} user"
+    super(msg)
   end
+end
 
+class WrongPasswordError < StandardError
+  def initialize
+    msg = "Password is wrong"
+    super(msg)
+  end
 end
