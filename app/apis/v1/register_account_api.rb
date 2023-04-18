@@ -1,9 +1,8 @@
 module V1
 
     class  RegisterAccountApi < Grape::API
-        resource :register_account do ##這段是什麼？
+        resource :register_account do 
 
-            ##來自postman?功能？
             params do
                 requires :account, type: String
                 requires :password, type: String
@@ -12,63 +11,62 @@ module V1
                 requires :height, type: Integer
                 requires :weight, type: Integer
                 requires :age, type: Integer #（類別名稱）
-                requires :mail, type: String
+                requires :email, type: String
             end
 
             post do
-                j=0
+                validity_of_input_info = true
                 
-                if params[:account]=="" || params[:password]==""|| params[:name]=="" || params[:phone_number]=="" || params[:mail]==""
-                    
+                if params[:account]=="" || params[:password]==""|| params[:name]=="" || params[:phone_number]=="" || params[:email]==""
                     #必填欄位空白
-                    j=1
+                    validity_of_input_info = false
                     return {context: '必填欄位空白'}
                 end
 
                 
 
-                user=User.find_by(mail: params[:mail])
-                if user!=nil
-                    #此mail已存在
-                    j=1
+                user=User.find_by(email: params[:email])
+                if not(user.nil?)
+                
+                    validity_of_input_info = false
                     return {context: '郵件已存在'}
-                    #test: "2"
-                    #context: 'email duplicated'
-                else
+                
+                   
+                elsif !(params[:email].include? "@")
+                    validity_of_input_info = false
+                    return {context: '郵件格式錯誤'}   
                     
                 end
+                
                 user=User.find_by(account: params[:account])
-                    if user!=nil
+                if not(user.nil?)
                         #此帳號已存在
-                        j=1
+                        validity_of_input_info = false
                         return {context: '帳號已存在'}
-                        #test: "3"
-                        #context: 'account already exist'
-
                 end
 
                 user=User.find_by(phone_number: params[:phone_number])
-                if user!=nil
+                if not(user.nil?)
                         #此帳號已存在
-                        
-                    j=1
+                    validity_of_input_info = false
                     return {context: '手機號碼已存在'}
                 elsif !(params[:phone_number].length==10)
-                    j=1
+                    validity_of_input_info = false
                     return {context: '手機號碼格式錯誤'}
                 elsif !(params[:phone_number][0..1]=="09")
-                    j=1
+                    validity_of_input_info = false
                     return {context: '這不是有效的手機號碼'}
+                    
                 end
-                #以上有問題
-
-                if j==0
-                User.create!(account:params[:account],password:params[:password],name:params[:name],phone_number:params[:phone_number],height:params[:height],weight:params[:weight],age:params[:age],mail:params[:mail])
                 
-               
-                {context: '創建帳戶成功'}
+
+                if validity_of_input_info
+                    
+                    User.create!(account:params[:account],password:params[:password],name:params[:name],phone_number:params[:phone_number],height:params[:height],weight:params[:weight],age:params[:age],email:params[:email])
+                    {context: '創建帳戶成功'}
                 end
             end
+
         end
         
     end
