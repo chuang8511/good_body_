@@ -5,7 +5,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 # require 'shoulda-matchers'
 # require 'json_expressions/rspec'
-# require 'database_cleaner'
+require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -45,18 +45,18 @@ RSpec.configure do |config|
 
   # FactoryBot.definition_file_paths << DaisyCommon::Engine.root.join("spec", "factories")
   #
-  # config.before(:suite) do
-  #   DatabaseCleaner.strategy = :transaction
-  #   DatabaseCleaner.clean_with(:truncation)
-  # end
-  #
-  # config.before(:all) do
-  #   DatabaseCleaner.start
-  # end
-  #
-  # config.after(:all) do
-  #   DatabaseCleaner.clean_with(:truncation)
-  # end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:all) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:all) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
 end
 
