@@ -5,7 +5,7 @@ RSpec.describe V1::RegisterAccountApi, type: :request do
 
   let(:params) {
     -> (account,phone_number,email) {
-        { account: account, password: "123", name:"horatio", phone_number: phone_number, height: 170, weight: 60, age: 20, email: email}
+        { account: account, password: "123", name:"horatio", phone_number: phone_number, height: 170, weight: 60, age: 20, email: email, gender:"male"}
     }
 }
   test_account1 = "abcabc123"

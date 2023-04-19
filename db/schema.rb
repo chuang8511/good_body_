@@ -10,15 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_17_052740) do
+ActiveRecord::Schema.define(version: 2023_04_19_031204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "sets_records", force: :cascade do |t|
+    t.string "account"
+    t.string "contents"
+    t.integer "sets"
+    t.integer "reps"
+    t.integer "weight"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "test_users", force: :cascade do |t|
     t.string "name", null: false
     t.string "identifier", null: false
     t.datetime "registration_datetime", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "times_records", force: :cascade do |t|
+    t.string "account"
+    t.string "contents"
+    t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,9 +50,9 @@ ActiveRecord::Schema.define(version: 2023_04_17_052740) do
     t.integer "age"
     t.integer "height"
     t.integer "weight"
+    t.string "gender"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "mail"
   end
 
 end

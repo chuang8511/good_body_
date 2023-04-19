@@ -12,6 +12,7 @@ module V1
                 requires :weight, type: Integer
                 requires :age, type: Integer #（類別名稱）
                 requires :email, type: String
+                requires :gender, type: String
             end
 
             post do
@@ -62,7 +63,7 @@ module V1
 
                 if validity_of_input_info
                     
-                    User.create!(account:params[:account],password:params[:password],name:params[:name],phone_number:params[:phone_number],height:params[:height],weight:params[:weight],age:params[:age],email:params[:email])
+                    User.create!(account:params[:account],password:params[:password],name:params[:name],phone_number:params[:phone_number],height:params[:height],weight:params[:weight],age:params[:age],email:params[:email],gender:params[:gender])
                     {context: '創建帳戶成功'}
                 end
             end
