@@ -1,5 +1,6 @@
 class LoginUser
 
+  #Isa's branch
   attr_reader :uuid, :account_number, :user, :is_login
 
   def initialize(uuid, account_number)
