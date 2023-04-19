@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2023_04_17_052740) do
+=======
+ActiveRecord::Schema.define(version: 2023_04_12_014743) do
+>>>>>>> dfc4a7a (0412noon)
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +38,7 @@ ActiveRecord::Schema.define(version: 2023_04_17_052740) do
     t.integer "weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "mail"
   end
 
 end
