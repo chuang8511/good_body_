@@ -6,11 +6,13 @@ RSpec.describe V1::GetPersonalProfileApi, type: :request do
     describe 'call g.p.p Api to take the personal profile' do
 
         it 'account exist' do
-            User.create!(account: "1",phone_number: "0973006502",email: "eddie@gmail.com",password: "23",weight: 1,height: 1)
+            User.create!(account: "1",phone_number: "0973006502",email: "eddie@gmail.com",password: "23",weight: 1,height: 1,age: 1,gender: "male")
             post path, params: {account: "1"}
             parsed = JSON.parse(response.body)
             expect(parsed["weight"]).to eq 1
             expect(parsed["height"]).to eq 1
+            expect(parsed["age"]).to eq 1
+            expect(parsed["gender"]).to eq "male"
        
         end
 
