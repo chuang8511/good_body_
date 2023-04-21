@@ -19,7 +19,14 @@ module V1
           # 指令想要做什麼
           
           # 新增、刪除、修改、查詢
-          record_function = RecordSetsFunctions.new(params[:functions],params[:account],params[:contents], params[:sets], params[:reps], params[:weight])
+          record_function = RecordSetsFunctions.new(
+            params[:functions],
+            params[:account],
+            params[:contents], 
+            params[:sets], 
+            params[:reps], 
+            params[:weight]
+          )
           record_function.set_functions
           # 檢視健身狀態
           #user = User.find(params[:user_id])
