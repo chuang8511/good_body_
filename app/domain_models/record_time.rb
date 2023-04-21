@@ -29,7 +29,6 @@ class RecordTime
 
     def create
         TimesRecord.create!(user_id: user_id, contents: contents, duration: duration)
-        return {msg: "Successfully recorded!"}
     end    
 
     def update

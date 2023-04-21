@@ -17,10 +17,6 @@ module V1
                 record_time.action
 
             end    
-
-
-
-
         end
     end        
 end
