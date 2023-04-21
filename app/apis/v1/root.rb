@@ -10,6 +10,7 @@ module V1
     mount V1::LoginApi
     mount V1::RegisterAccountApi
     mount V1::LogoutApi
+    mount V1::RecordTimeApi
 
 
   end
