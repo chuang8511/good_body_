@@ -11,7 +11,7 @@ module V1
           requires :sets, type: Integer # 組數
           requires :reps, type: Integer # 次數
           requires :weight, type: Float # 重量
-          requires :record_sets_id Interger # 應該要在新增時生成
+          requires :record_sets_id, type: Interger # 應該要在新增時生成
         end
         
         # 新增健身紀錄
