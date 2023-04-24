@@ -47,11 +47,11 @@ class RecordSetsFunctions
 
     end
 
-    #def delete_setrecord
+    def delete_setrecord
 
 
 
-    #end
+    end
 
     def view_setrecord
 
