@@ -1,7 +1,7 @@
 class RecordSetsFunctions
 
     attr_accessor :functions, :user_id, :contents, :sets, :reps, :weight, :record_sets_id
-
+    
     def initialize(functions,account, contents, sets, reps, weight)
         @functions = functions
         @user_id = user_id
