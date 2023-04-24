@@ -11,7 +11,7 @@ module V1
           requires :sets, type: Integer # 組數
           requires :reps, type: Integer # 次數
           requires :weight, type: Float # 重量
-          requires :record_sets_id Interger
+          requires :record_sets_id Interger # 應該要在新增時生成
         end
         
         # 新增健身紀錄
@@ -36,7 +36,7 @@ module V1
             params[:sets], 
             params[:reps], 
             params[:weight],
-            params[:record_set_id]
+            params[:record_sets_id]
           )
           record_function.set_functions
         end
@@ -50,7 +50,7 @@ module V1
             nil, 
             nil, 
             nil,
-            params[:record_set_id]
+            params[:record_sets_id]
           )
           record_function.set_functions
         end
@@ -58,7 +58,7 @@ module V1
         # 檢視健身紀錄
         get do
           record_function = RecordSetsFunctions.new(
-            "retrieve",
+            "view",
             params[:user_id],
             nil, 
             nil, 
@@ -68,11 +68,6 @@ module V1
           )
           record_function.set_functions
         end
-
       end
-  
-  
     end
-  
-  
 end

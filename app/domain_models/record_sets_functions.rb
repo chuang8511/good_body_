@@ -1,16 +1,10 @@
 class RecordSetsFunctions
 
-    attr_accessor :functions,:user_id, :user, :contents, :sets, :reps, :weight
+    attr_accessor :functions, :user_id, :contents, :sets, :reps, :weight, :record_sets_id
 
     def initialize(functions,account, contents, sets, reps, weight)
-        @user = User.find_by(account: account)
-        @user_id =user&.id
-            # if @user
-            #     @user_id = user.id #why????????
-            # else
-            #     "Something goes wrong"
-            # end
         @functions = functions
+        @user_id = user_id
         @contents = contents
         @sets = sets
         @reps = reps
@@ -19,7 +13,7 @@ class RecordSetsFunctions
 
     def set_functions
         case functions
-        when "add"
+        when "create"
             create_setrecord
         when "update"
             update_setrecord
@@ -43,23 +37,31 @@ class RecordSetsFunctions
     end
 
     def update_setrecord (contents, sets, reps, weight)
-        
-
+        set_record = SetsRecord.find_by(id: record_set_id, user_id: user_id)
+        if set_record
+            set_record.update!(
+              contents: contents,
+              sets: sets,
+              reps: reps,
+              weight: weight
+            )
+        else
+            raise "Set record not found"
+        end
     end
 
     def delete_setrecord
-
-
-
+        set_record = SetsRecord.find_by(id: record_set_id, user_id: user_id)
+        if set_record
+          set_record.destroy
+        else
+          raise "Set record not found"
+        end
     end
+
 
     def view_setrecord
-
-
-
+        SetsRecord.find_by(id: record_set_id, user_id: user_id)
     end
-
-
-    
 
 end
