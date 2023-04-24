@@ -6,18 +6,18 @@ module V1
   
         params do
           requires :functions, type: String # 選擇要什麼 Function: Sets / Times
-          requires :user_id, type: String
+          requires :user_id, type: Integer
           requires :contents, type: String
           requires :sets, type: Integer # 組數
           requires :reps, type: Integer # 次數
           requires :weight, type: Float # 重量
-          requires :record_sets_id, type: Interger # 應該要在新增時生成
+          # requires :record_sets_id, type: Integer # 應該要在新增時生成
         end
         
         # 新增健身紀錄
         post do
           record_function = RecordSetsFunctions.new(
-            "create",
+            params[:functions],
             params[:user_id],
             params[:contents], 
             params[:sets], 
@@ -29,14 +29,15 @@ module V1
 
         # 修改健身紀錄
         put ':record_set_id' do
+          # record_set_id = params[:record_set_id]
           record_function = RecordSetsFunctions.new(
-            "update",
+            params[:functions],
             params[:user_id],
             params[:contents], 
             params[:sets], 
             params[:reps], 
             params[:weight],
-            params[:record_sets_id]
+            record_set_id
           )
           record_function.set_functions
         end
@@ -44,13 +45,13 @@ module V1
         # 刪除健身紀錄
         delete ':record_set_id' do
           record_function = RecordSetsFunctions.new(
-            "delete",
+            params[:functions],
             params[:user_id],
             nil, 
             nil, 
             nil, 
             nil,
-            params[:record_sets_id]
+            params[:record_set_id]
           )
           record_function.set_functions
         end
@@ -58,7 +59,7 @@ module V1
         # 檢視健身紀錄
         get do
           record_function = RecordSetsFunctions.new(
-            "view",
+            params[:functions],
             params[:user_id],
             nil, 
             nil, 

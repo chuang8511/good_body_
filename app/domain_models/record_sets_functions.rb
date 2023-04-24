@@ -1,43 +1,47 @@
 class RecordSetsFunctions
 
-    attr_accessor :functions, :user_id, :contents, :sets, :reps, :weight, :record_sets_id
-    
-    def initialize(functions,account, contents, sets, reps, weight)
+    attr_accessor :functions, :user_id, :contents, :sets, :reps, :weight, :record_set_id
+
+    def initialize(functions, user_id, contents, sets, reps, weight)
         @functions = functions
         @user_id = user_id
         @contents = contents
         @sets = sets
         @reps = reps
         @weight = weight
+        @record_set_id = 0
     end
 
     def set_functions
         case functions
         when "create"
-            create_setrecord
+            create_set_record
         when "update"
-            update_setrecord
+            update_set_record
         when "delete"
-            delete_setrecord
+            delete_set_record
         when "view"
-            view_setrecord
+            view_set_record
         else
           raise "Invalid function"
         end
     end
 
-    def create_setrecord
+    def create_set_record
+        max_record_set_id = SetsRecord.maximum(:record_set_id) || 0
+        next_record_set_id = max_record_set_id + 1       
         SetsRecord.create!(
+            record_set_id: next_record_set_id,
             user_id: user_id,
             contents: contents,
             sets: sets,
             reps: reps,
             weight: weight
-          )
+        )
     end
 
-    def update_setrecord (contents, sets, reps, weight)
-        set_record = SetsRecord.find_by(id: record_set_id, user_id: user_id)
+    def update_set_record
+        set_record = SetsRecord.find_by(record_set_id: record_set_id, user_id: user_id)
         if set_record
             set_record.update!(
               contents: contents,
@@ -45,13 +49,14 @@ class RecordSetsFunctions
               reps: reps,
               weight: weight
             )
+            
         else
             raise "Set record not found"
         end
     end
 
-    def delete_setrecord
-        set_record = SetsRecord.find_by(id: record_set_id, user_id: user_id)
+    def delete_set_record
+        set_record = SetsRecord.find_by(record_set_id: record_set_id, user_id: user_id)
         if set_record
           set_record.destroy
         else
@@ -60,8 +65,8 @@ class RecordSetsFunctions
     end
 
 
-    def view_setrecord
-        SetsRecord.find_by(id: record_set_id, user_id: user_id)
+    def view_set_record
+        SetsRecord.find_by(record_set_id: record_set_id, user_id: user_id)
     end
 
 end
