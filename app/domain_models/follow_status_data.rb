@@ -57,12 +57,16 @@ class FollowStatusData
     end
 
     def add_follow_status_record(subject_user_id,action_type,object_user_id)
+        
         FollowStatusRecord.create!(subject_user_id:subject_user_id,action_type:action_type,object_user_id:object_user_id)
+        
         update_record_to_latest()
+      
 
     end
 
     def get_following(subject_user_id)
+       
         return current_status[subject_user_id]
     end
 
