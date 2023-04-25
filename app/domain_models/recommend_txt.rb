@@ -1,0 +1,3 @@
+class RecommendTxt
+    
+end

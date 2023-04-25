@@ -10,8 +10,6 @@ module V1
             end
 
             post do
-
-                p 'It is a text'
                 #p recommendation_follow.recomd( 1, [2,3] )
 
                 TestUser.create!(name: "chunhao",
@@ -19,12 +17,8 @@ module V1
                 registration_datetime: Time.now)
 
                 p 'It rue context'
-                k=FollowStatusData.new()
-                # s
-                ii = RA.new()
-                
-                ii.recomd( 1, [2,3] )
-
+                ii = RecommendFollow.new()
+                p ii.recomd( 1, [2, 2,3] )
                 p 'It rue context'
 
                 if params[:check_point]
@@ -36,7 +30,6 @@ module V1
                     {
                         test: params[:test_id],
                         context: 'It is a false context'
-
                     }
 
                 end
