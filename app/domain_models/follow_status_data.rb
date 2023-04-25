@@ -62,7 +62,6 @@ class FollowStatusData
         
         update_record_to_latest()
       
-
     end
 
     def get_following(subject_user_id)
@@ -72,6 +71,10 @@ class FollowStatusData
 
     def get_follower(subject_user_id)
         return current_following[subject_user_id]
+    end
+
+    def get_record_number()
+        return FollowStatusRecord.all.count
     end
 
 end

@@ -1,6 +1,6 @@
 module V1
 
-    class FollowApi < Grape::API
+    class UnfollowApi < Grape::API
   
       resource :follow do
   
