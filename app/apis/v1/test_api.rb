@@ -16,10 +16,10 @@ module V1
                 identifier: params[:test_id],
                 registration_datetime: Time.now)
 
-                p 'It rue context'
-                ii = RecommendFollow.new()
-                p ii.recomd( 1, [2, 2,3] )
-                p 'It rue context'
+                
+                ii = RecommendTxt.new()
+                ii.find_sets_table (1)
+                
 
                 if params[:check_point]
                     {
@@ -33,14 +33,7 @@ module V1
                     }
 
                 end
-
-
             end
-
         end
-
-
     end
-
-
 end

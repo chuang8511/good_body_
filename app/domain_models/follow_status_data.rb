@@ -25,7 +25,7 @@ class FollowStatusData
         individual_records.each do |record|
             individual_following_list.append(record.object_user_id) if record.action_type=="follow"
             individual_following_list.delete(record.object_user_id) if record.action_type=="unfollow"
-
+            
         end
         return individual_following_list
     end
