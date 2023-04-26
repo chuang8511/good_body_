@@ -41,7 +41,7 @@ class RecordSetsFunctions
     end
 
     def update_set_record
-        set_record = SetsRecord.find_by(record_set_id: record_set_id, user_id: user_id)
+        set_record = SetsRecord.find_by(record_set_id: record_set_id)
         if set_record
             set_record.update!(
               contents: contents,
@@ -56,7 +56,7 @@ class RecordSetsFunctions
     end
 
     def delete_set_record
-        set_record = SetsRecord.find_by(record_set_id: record_set_id, user_id: user_id)
+        set_record = SetsRecord.find_by(record_set_id: record_set_id)
         if set_record
           set_record.destroy
         else
