@@ -1,3 +1,4 @@
+require_relative "follow_status_data"
 class FollowAndUnfollowUser
 
     attr_reader :subject_user_id, :follow_status_data
@@ -8,28 +9,28 @@ class FollowAndUnfollowUser
     end
 
     def follow(object_user_account)
-        object_user_id=User.find_by(account: params[:object_account]).id
+        object_user_id=User.find_by(account: object_user_account).id
 
-        alreay_following!
-        follow_status_data=FollowStatusData.add_follow_status_record(subject_user_id,"follow",object_user_id)
+        already_following!(object_user_id)
+        follow_status_data.add_follow_status_record(subject_user_id,"follow",object_user_id)
         
     end
 
     def unfollow(object_user_account)
-        object_user_id=User.find_by(account: params[:object_account]).id
+        object_user_id=User.find_by(account: object_user_account).id
 
-        not_following!
-        follow_status_data=FollowStatusData.add_follow_status_record(subject_user_id,"unfollow",object_user_id)
+        not_following!(object_user_id)
+        follow_status_data.add_follow_status_record(subject_user_id,"unfollow",object_user_id)
     
         
     end
 
-    def alreay_following!(object_account_id)
-        raise AlreadyFollowingError.new(subject_user_id,object_user_id) if follow_status_data.get_following(subject_user_id).include?(object_user_id)
+    def already_following!(object_user_id)
+        raise AlreadyFollowingError.new(@subject_user_id,object_user_id) if follow_status_data.get_following(@subject_user_id).include?(object_user_id)
     end
 
-    def not_following!(object_account_id)
-        raise NotFollowingError.new(subject_user_id,object_user_id) if not(follow_status_data.get_following(subject_user_id).include?(object_user_id))
+    def not_following!(object_user_id)
+        raise NotFollowingError.new(@subject_user_id,object_user_id) if not(follow_status_data.get_following(@subject_user_id).include?(object_user_id))
     end
 end
 

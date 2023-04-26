@@ -2,7 +2,7 @@ module V1
 
     class UnfollowApi < Grape::API
   
-      resource :follow do
+      resource :unfollow do
   
   
         params do
