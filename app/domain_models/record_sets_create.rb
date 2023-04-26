@@ -24,38 +24,15 @@ class RecordSetsCreate
 end
 
 
-# class RecordSetsUpdate
-#     def update_set_record
-#         set_record = SetsRecord.find_by(id: id)
-#         if set_record
-
-#             set_record.update!(
-#               contents: contents,
-#               sets: sets,
-#               reps: reps,
-#               weight: weight
-#             )
-
-#             raise 'It is a true context'
-            
-#         else
-#             raise "Set record not found"
-#         end
-#     end
-
-    
-#     def delete_set_record
-#         set_record = SetsRecord.find_by(record_set_id: record_set_id)
-#         if set_record
-#           set_record.destroy
-#         else
-#           raise "Set record not found"
-#         end
-#     end
+# # 檢視健身紀錄
+# get do
+#     record_function = RecordSetsView.new(params[:user_id])
+#     record_function.view_set_record
+#   end
 
 
 #     def view_set_record
-#         SetsRecord.find_by(record_set_id: record_set_id, user_id: user_id)
+#         SetsRecord.find_by(user_id: user_id)
 #     end
 
 # end
