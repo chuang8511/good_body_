@@ -9,25 +9,11 @@ class RecordTimeCreate
     end 
 
 
-    def create_time_record #新增一個以time-based的健身紀錄
+    def create_time_record #新增time-based的健身紀錄
         TimesRecord.create!(user_id: user_id, contents: contents, duration: duration)
-    end   
-    
-
-   
-    
-    def delete
-
     end
     
-    def view
-
-    end
-
-
-    
-
-    # def second_formatted(seconds) #把秒轉換為分鐘和小時 #先不做這個
+    # def second_formatted(seconds) #把秒轉換為分鐘和小時 
     #     ["#{seconds / 3600}h","#{seconds / 60 % 60}m","#{seconds % 60}s"].select { |str| str =~ /[1-9]/ }.join(" ")
     # end
 

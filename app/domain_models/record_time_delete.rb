@@ -6,7 +6,7 @@ class RecordTimeDelete
         @id = id
     end 
  
-    def delete_time_record
+    def delete_time_record #刪除現存的紀錄
        time_record = TimesRecord.find_by(id: id)
        if time_record != nil
           time_record.destroy
