@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2023_04_19_031204) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "times_records", id: false, force: :cascade do |t|
+  create_table "times_records", force: :cascade do |t|
     t.integer "user_id"
     t.string "contents"
     t.integer "duration"
