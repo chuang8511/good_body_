@@ -15,23 +15,23 @@ RSpec.describe FollowStatusData do
        expect(follow_status_data.get_record_number).to eq(2)
     end
 
-    it 'check if current_status and current_following are initialized' do
+    it 'check if each_user_following_list and each_user_follower_list are initialized' do
 
-        expect(follow_status_data.current_status).is_a?(Hash)
-        expect(follow_status_data.current_following).is_a?(Hash)
+        expect(follow_status_data.each_user_following_list).is_a?(Hash)
+        expect(follow_status_data.each_user_follower_list).is_a?(Hash)
         
     end
 
-    it 'check if current_status is working properly' do
+    it 'check if each_user_following_list is working properly' do
         
-        expect(follow_status_data.current_status[1]).to eq([2])
-        expect(follow_status_data.current_status[2]).to eq([3])
+        expect(follow_status_data.each_user_following_list[1]).to eq([2])
+        expect(follow_status_data.each_user_following_list[2]).to eq([3])
         
     end
 
-    it 'check if current_following is working properly' do
-        expect(follow_status_data.current_following[2]).to eq([1])
-        expect(follow_status_data.current_following[3]).to eq([2])
+    it 'check if each_user_follower_list is working properly' do
+        expect(follow_status_data.each_user_follower_list[2]).to eq([1])
+        expect(follow_status_data.each_user_follower_list[3]).to eq([2])
 
     end
   end

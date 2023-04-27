@@ -1,16 +1,16 @@
 class FollowStatusData
 
-    attr_reader :current_status,:current_following,:index
+    attr_reader :each_user_following_list,:each_user_follower_list,:index
   
     def initialize()#將資料庫的紀錄轉換成當下的追蹤狀態
-        @current_status={} #每個使用者的追蹤清單
-        @current_following={}    #每個使用者的粉絲清單
+        @each_user_following_list=Hash.new([]) #每個使用者的追蹤清單
+        @each_user_follower_list=Hash.new([])    #每個使用者的粉絲清單
         @index=1
         user_number=User.count
 
         1.upto(user_number) do |user_id|
-            current_status[user_id] = Array.new()
-            current_following[user_id] = Array.new()
+            each_user_following_list[user_id]=Array.new()
+            each_user_follower_list[user_id]=Array.new()
         end
 
         FollowStatusRecord.all.each do |record|
@@ -20,13 +20,16 @@ class FollowStatusData
          #應該要是一個hash，內容是目前的追蹤狀態   
     end
 
-    def update_one_record(record)#從資料庫讀取下一筆紀錄，用以更新FollowStatusData       
+    def update_one_record(record)#從資料庫讀取下一筆紀錄，用以更新FollowStatusData     
+        
         if record.action_type=="follow"
-            current_status[record.subject_user_id].append(record.object_user_id) 
-            current_following[record.object_user_id].append(record.subject_user_id)
+            each_user_following_list[record.subject_user_id].append(record.object_user_id) 
+            each_user_follower_list[record.object_user_id].append(record.subject_user_id)
+            p each_user_following_list[record.subject_user_id]
+            p each_user_following_list[record.object_user_id]
         elsif record.action_type=="unfollow"
-            current_status[record.subject_user_id].delete(record.object_user_id) 
-            current_following[record.object_user_id].delete(record.subject_user_id)
+            each_user_following_list[record.subject_user_id].delete(record.object_user_id) 
+            each_user_follower_list[record.object_user_id].delete(record.subject_user_id)
             
         end
         @index+=1
@@ -56,11 +59,11 @@ class FollowStatusData
 
     def get_following(subject_user_id)
        
-        return current_status[subject_user_id]
+        return each_user_following_list[subject_user_id]
     end
 
     def get_follower(subject_user_id)
-        return current_following[subject_user_id]
+        return each_user_follower_list[subject_user_id]
     end
 
     def get_record_number()

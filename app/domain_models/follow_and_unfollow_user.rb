@@ -24,7 +24,7 @@ class FollowAndUnfollowUser
     
         
     end
-
+private
     def cannot_follow_yourself!(object_user_id)
         raise SelfFollowingError.new(@subject_user_id,object_user_id) if @subject_user_id==object_user_id
     end
