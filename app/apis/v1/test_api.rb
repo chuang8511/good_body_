@@ -18,7 +18,8 @@ module V1
 
                 
                 ii = RecommendTxt.new()
-                ii.find_sets_table (1)
+                #p ii.find_sets_table (1)
+                p ii.find_txt_recommend (2)
                 
 
                 if params[:check_point]
