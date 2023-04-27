@@ -6,11 +6,10 @@ module V1
                 requires :user_id, type: Integer
             end
         
-
         post do
             findtxt = RecommendTxt.new()
-            #txt = findtxt.find_txt_recommend(params[:user_id]) #arr(2)
-            txt = findtxt.find_txt_recommend(2)
+            txt = findtxt.find_txt_recommend(params[:user_id]) #arr(2)
+            #txt = findtxt.find_txt_recommend(2)
 
             if txt.length == 2              # simple code ~/
                 txt.append("lack of info")
