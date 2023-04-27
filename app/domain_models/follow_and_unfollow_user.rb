@@ -10,7 +10,7 @@ class FollowAndUnfollowUser
 
     def follow(object_user_account)
         object_user_id=User.find_by(account: object_user_account).id
-
+        cannot_follow_yourself!(object_user_id)
         already_following!(object_user_id)
         follow_status_data.add_follow_status_record(subject_user_id,"follow",object_user_id)
         
@@ -18,11 +18,15 @@ class FollowAndUnfollowUser
 
     def unfollow(object_user_account)
         object_user_id=User.find_by(account: object_user_account).id
-
+        cannot_follow_yourself!(object_user_id)
         not_following!(object_user_id)
         follow_status_data.add_follow_status_record(subject_user_id,"unfollow",object_user_id)
     
         
+    end
+
+    def cannot_follow_yourself!(object_user_id)
+        raise SelfFollowingError.new(@subject_user_id,object_user_id) if @subject_user_id==object_user_id
     end
 
     def already_following!(object_user_id)
@@ -34,16 +38,24 @@ class FollowAndUnfollowUser
     end
 end
 
+
+class SelfFollowingError < StandardError
+    def initialize(subject_user_id,object_user_id)
+      msg = "You may not follow or unfollow yourself"
+      super(msg)
+    end
+end
+
 class AlreadyFollowingError < StandardError
     def initialize(subject_user_id,object_user_id)
-      msg = "#{User.find_by(id: subject_user_id).account} is already following  #{User.find_by(id: object_user_id).account}"
+      msg = "#{User.find_by(id: subject_user_id).account} is already following #{User.find_by(id: object_user_id).account}"
       super(msg)
     end
 end
 
 class NotFollowingError < StandardError
     def initialize(subject_user_id,object_user_id)
-      msg = "#{User.find_by(id: subject_user_id).account} is not following  #{User.find_by(id: object_user_id).account}"
+      msg = "#{User.find_by(id: subject_user_id).account} is not following #{User.find_by(id: object_user_id).account}"
       super(msg)
     end
 end
