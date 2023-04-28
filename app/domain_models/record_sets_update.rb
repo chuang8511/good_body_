@@ -35,15 +35,15 @@ class RecordSetsUpdate
     end
 
     def set_is_wrong!
-        raise NoSetError.new if set.blank? || set == 0 || set.negative? || set > 100
+        raise NoSetError.new(set) if set.blank? || set == 0 || set.negative? || set > 100
     end
 
     def rep_is_wrong!
-        raise NoRepError.new if rep.blank? || rep == 0 || rep.negative? || rep > 100
+        raise NoRepError.new(rep) if rep.blank? || rep == 0 || rep.negative? || rep > 100
     end
 
     def weight_is_wrong!
-        raise NoWeightError.new if weight.blank? || weight ==0 || weight.negative? || weight > 300
+        raise NoWeightError.new(weight) if weight.blank? || weight ==0 || weight.negative? || weight > 300
     end
 
     def all_params_are_same!

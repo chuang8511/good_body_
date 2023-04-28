@@ -1,3 +1,4 @@
+require_relative 'common_error'
 
 class LoginUser
 

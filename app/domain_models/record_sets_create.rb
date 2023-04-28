@@ -25,11 +25,11 @@ class RecordSetsCreate
     private
 
     def user_not_found!
-        raise NoUseridError.new(user_id) if user.blank?
+        raise NoUseridError.new if user.blank?
     end
 
     def content_is_wrong!
-        raise NoContentError.new(content) if content.blank?
+        raise NoContentError.new if content.blank?
     end
 
     def set_is_wrong!
