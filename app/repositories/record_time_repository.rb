@@ -5,8 +5,8 @@ class RecordTimeRepository
             TimesRecord.create!(user_id: user_id, contents: contents, duration: duration, distance: distance)
         end
 
-        def delete(id)
-            TimesRecord.destroy(id)
+        def delete(time_record)
+            time_record.destroy
         end
 
         def update(time_record, contents, duration, distance)

@@ -19,7 +19,7 @@ class RecordTimeDelete
    end
 
    def delete_time_succeed
-      RecordTimeRepository.delete(id)
+      RecordTimeRepository.delete(time_record)
    end
     
  end
