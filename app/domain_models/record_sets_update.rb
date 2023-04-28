@@ -1,29 +1,100 @@
 class RecordSetsUpdate
 
-    attr_accessor :id, :contents, :sets, :reps, :weight
+    attr_accessor :id, :id_set, :content, :set, :rep, :weight
 
-    def initialize(id, contents, sets, reps, weight)
+    def initialize(id, content, set, rep, weight)
         @id = id
-        @contents = contents
-        @sets = sets
-        @reps = reps
+        @id_set = SetsRecord.find_by(id: id)
+        @content = content
+        @set = set
+        @rep = rep
         @weight = weight
+
     end
 
     def update_set_record
-        set_record = SetsRecord.find_by(id: id)
-        
-        if set_record
-            set_record.update!(
-                contents: contents,
-                sets: sets,
-                reps: reps,
-                weight: weight
-            )        
-        else
-            raise "Set record not found"
-        end
-
+        id_not_found!
+        content_is_wrong!
+        set_is_wrong!
+        rep_is_wrong!
+        weight_is_wrong!
+        all_params_are_same!
+        succeed_to_update_set
     end
 
+    private
+
+    def id_not_found!
+        raise NoIdError.new(id) if id_set.blank?
+    end
+
+    def content_is_wrong!
+        raise NoContentError.new if content.blank?
+    end
+
+    def set_is_wrong!
+        raise NoSetError.new if set.blank? || set == 0 || set.negative? || set > 100
+    end
+
+    def rep_is_wrong!
+        raise NoRepError.new if rep.blank? || rep == 0 || rep.negative? || rep > 100
+    end
+
+    def weight_is_wrong!
+        raise NoWeightError.new if weight.blank? || weight ==0 || weight.negative? || weight > 300
+    end
+
+    def all_params_are_same!
+        if id_set.contents == content && id_set.sets == set && id_set.reps == rep && id_set.weight == weight
+            raise SameParamsError.new
+        end
+    end
+
+    def succeed_to_update_set
+        RecordSetRepository.update_set_record(id_set, content, set, rep, weight)
+    end
+
+end
+
+
+class NoIdError < StandardError
+    def initialize(id)
+        msg = "The record ID: #{id} isn't existed."
+        super(msg)
+    end
+  end
+
+class NoContentError < StandardError
+    def initialize
+        msg = "The content input is invalid"
+        super(msg)
+    end
+end
+
+class NoSetError < StandardError
+    def initialize
+        msg = "The set input is invalid"
+        super(msg)
+    end
+end
+
+class NoRepError < StandardError
+    def initialize
+        msg = "The Rep input is invalid"
+        super(msg)
+    end
+end
+
+class NoWeightError < StandardError
+    def initialize
+        msg = "The weight input is invalid"
+        super(msg)
+    end
+end
+
+class SameParamsError < StandardError
+    def initialize
+        msg = "Your new update is same as the former one"
+        super(msg)
+    end
 end

@@ -7,18 +7,18 @@ module V1
             # 修改健身紀錄
             params do
                 requires :id, type: Integer
-                requires :contents, type: String
-                requires :sets, type: Integer 
-                requires :reps, type: Integer 
+                requires :content, type: String
+                requires :set, type: Integer 
+                requires :rep, type: Integer 
                 requires :weight, type: Float
             end
   
             put do
                 record_function = RecordSetsUpdate.new(
                     params[:id],
-                    params[:contents], 
-                    params[:sets], 
-                    params[:reps], 
+                    params[:content], 
+                    params[:set], 
+                    params[:rep], 
                     params[:weight]
                 )
                 record_function.update_set_record
