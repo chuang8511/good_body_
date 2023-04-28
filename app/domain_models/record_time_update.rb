@@ -1,3 +1,5 @@
+require_relative 'common_error'
+
 class RecordTimeUpdate
 
    attr_accessor :id, :contents, :duration, :distance, :time_record
@@ -22,26 +24,26 @@ class RecordTimeUpdate
    private
 
    def no_record_found!
-      raise NoRecordError.new(id) if time_record.blank?
+      raise NoIdError.new if time_record.blank?
    end
 
    def content_not_valid! 
-      raise UnvalidContentError.new if contents.blank? 
+      raise NoContentError.new if contents.blank? 
    end
 
    def duration_not_valid!
       if duration.blank? || duration.negative? || duration == 0 || duration > 1440 #時間不應該超過一天(1440分鐘)
-          raise UnvalidDurationError.new
+          raise NoDurationError.new(duration)
       end
    end
 
    def distance_not_valid!
-      raise UnvalidDistanceError.new if distance.negative?
+      raise NoDistanceError.new(distance) if distance.negative?
    end
 
    def content_is_same!
       if time_record.contents == contents && @time_record.duration == duration && @time_record.distance == distance
-         raise SameContentError.new
+         raise SameParamsError.new
       end
    end
 
@@ -50,37 +52,3 @@ class RecordTimeUpdate
    end
 end
 
-class NoRecordError < StandardError
-   def initialize(id)
-       msg = "Can't find the record: #{id}"
-       super(msg)
-   end
-end
-
-class UnvalidContentError < StandardError
-   def initialize
-       msg = "Your content is not valid"
-       super(msg)
-   end
-end
-
-class UnvalidDurationError < StandardError
-   def initialize
-       msg = "Your time period is not valid"
-       super(msg)
-   end
-end
-
-class UnvalidDistanceError < StandardError
-   def initialize
-       msg = "Your distance is not valid"
-       super(msg)
-   end
-end
-
-class SameContentError < StandardError
-   def initialize
-      msg = "Your input is exactly the same as the original record"
-      super(msg)
-   end
-end

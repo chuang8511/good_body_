@@ -1,3 +1,5 @@
+require_relative 'common_error'
+
 class RecordTimeDelete
 
    attr_accessor :id, :time_record
@@ -15,7 +17,7 @@ class RecordTimeDelete
    private
 
    def no_record_found!
-      raise NoRecordError.new(id) if time_record.blank?
+      raise NoIdError.new if time_record.blank?
    end
 
    def delete_time_succeed
@@ -24,9 +26,4 @@ class RecordTimeDelete
     
  end
 
-class NoRecordError < StandardError
-   def initialize(id)
-       msg = "Can't find the record: #{id}"
-       super(msg)
-   end
-end
+

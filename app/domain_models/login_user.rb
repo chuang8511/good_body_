@@ -1,3 +1,5 @@
+require_relative 'common_error'
+
 class LoginUser
 
   attr_reader :uuid, :account_number, :user, :is_login
