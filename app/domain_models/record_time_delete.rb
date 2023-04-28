@@ -3,7 +3,7 @@ class RecordTimeDelete
    attr_accessor :id, :time_record
      
    def initialize(id)
-      @id = id
+      @id          = id
       @time_record = TimesRecord.find_by(id: id)
    end 
  
@@ -19,12 +19,12 @@ class RecordTimeDelete
    end
 
    def delete_time_succeed
-      RecordTimeRepository.delete(time_record)
+      RecordTimeRepository.delete(id)
    end
     
  end
 
- class NoRecordError < StandardError
+class NoRecordError < StandardError
    def initialize(id)
        msg = "Can't find the record: #{id}"
        super(msg)
