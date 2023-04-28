@@ -41,7 +41,7 @@ class RecordTimeCreate
 
     def record_time_succeed
         #@record_time_done = true #不確定這個的意義
-        RecordTimeRepository.succeed_to_create(user_id, contents, duration, distance)
+        RecordTimeRepository.create(user_id, contents, duration, distance)
     end
 end
 
