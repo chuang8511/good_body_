@@ -1,13 +1,16 @@
 class RecordTimeDelete
 
-    attr_accessor :id
+    attr_accessor :id, :time_record
      
     def initialize(id)
-        @id = id
+      @id = id
+      @time_record = TimesRecord.find_by(id: id)
     end 
  
     def delete_time_record #刪除現存的紀錄
-       time_record = TimesRecord.find_by(id: id)
+      no_record_found!
+
+      
        if time_record != nil
           time_record.destroy
        else

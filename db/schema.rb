@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2023_04_19_031204) do
     t.integer "user_id"
     t.string "contents"
     t.integer "duration"
+    t.float "distance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

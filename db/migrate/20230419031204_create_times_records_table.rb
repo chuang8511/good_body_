@@ -4,6 +4,7 @@ class CreateTimesRecordsTable < ActiveRecord::Migration[6.1]
       t.integer :user_id
       t.string :contents
       t.integer :duration
+      t.float :distance
 
       t.timestamps
     end
