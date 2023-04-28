@@ -1,3 +1,5 @@
+require_relative 'common_error'
+
 class RecordSetsDelete
 
     attr_accessor :id, :id_set
@@ -20,12 +22,4 @@ class RecordSetsDelete
       RecordSetRepository.delete_set_record(id_set)
     end
     
-end
-
-
-class NoIdError < StandardError
-  def initialize(id)
-      msg = "The record ID: #{id} isn't existed."
-      super(msg)
-  end
 end

@@ -1,3 +1,5 @@
+require_relative 'common_error'
+
 class RecordSetsUpdate
 
     attr_accessor :id, :id_set, :content, :set, :rep, :weight
@@ -54,47 +56,4 @@ class RecordSetsUpdate
         RecordSetRepository.update_set_record(id_set, content, set, rep, weight)
     end
 
-end
-
-
-class NoIdError < StandardError
-    def initialize(id)
-        msg = "The record ID: #{id} isn't existed."
-        super(msg)
-    end
-  end
-
-class NoContentError < StandardError
-    def initialize
-        msg = "The content input is invalid"
-        super(msg)
-    end
-end
-
-class NoSetError < StandardError
-    def initialize
-        msg = "The set input is invalid"
-        super(msg)
-    end
-end
-
-class NoRepError < StandardError
-    def initialize
-        msg = "The Rep input is invalid"
-        super(msg)
-    end
-end
-
-class NoWeightError < StandardError
-    def initialize
-        msg = "The weight input is invalid"
-        super(msg)
-    end
-end
-
-class SameParamsError < StandardError
-    def initialize
-        msg = "Your new update is same as the former one"
-        super(msg)
-    end
 end

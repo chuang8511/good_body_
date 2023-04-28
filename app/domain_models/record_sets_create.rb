@@ -1,3 +1,5 @@
+require_relative 'common_error'
+
 class RecordSetsCreate
 
     attr_accessor :user_id, :user, :content, :set, :rep, :weight
@@ -48,39 +50,3 @@ class RecordSetsCreate
     end
 
 end
-
-class NoUseridError < StandardError
-    def initialize(user_id)
-        msg = "The user ID: #{user_id} isn't existed."
-        super(msg)
-    end
-end
-
-class NoContentError < StandardError
-    def initialize(content)
-        msg = "Your input: #{content} is a wrong format, please modify it."
-        super(msg)
-    end
-end
-
-class NoSetError < StandardError
-    def initialize(set)
-        msg = "Your input: #{set} is a wrong format, please modify it."
-        super(msg)
-    end
-end
-
-class NoRepError < StandardError
-    def initialize(rep)
-        msg = "Your input: #{rep} is a wrong format, please modify it."
-        super(msg)
-    end
-end
-
-class NoWeightError < StandardError
-    def initialize(weight)
-        msg = "Your input: #{weight} is a wrong format, please modify it."
-        super(msg)
-    end
-end
-
