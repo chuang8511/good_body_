@@ -52,9 +52,11 @@ class RecommendFollow
     end
 
     def recomd( subject_user_id, orderlist )  # main()
+        ############ Main ############ 
         # input: subject_user_id: int ,  target user's id;
         ##     : orderlist: arr(1)    ,  the order of the random walk
         # output: recomd_follower_list: arr(1) , recommendated followrs, [nil] for no eligible case
+        ##############################
         recomdlist = []
         for i in orderlist 
             recomdlist.append( random_walk( subject_user_id, i, recomdlist ) )

@@ -7,10 +7,11 @@ module V1
             end
         
         post do
+            p "gggggg"
             findtxt = RecommendTxt.new()
             txt = findtxt.find_txt_recommend(params[:user_id]) #arr(2)
             #txt = findtxt.find_txt_recommend(2)
-
+=begin
             if txt.length == 2              # simple code ~/
                 txt.append("lack of info")
             elsif txt.length == 1
@@ -27,8 +28,9 @@ module V1
                 txt2: txt[1],
                 txt3: txt[2]
             }
+            
         end
-
+=end
     end
 end
 end

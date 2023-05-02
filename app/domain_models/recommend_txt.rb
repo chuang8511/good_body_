@@ -1,6 +1,6 @@
 class RecommendTxt
 
-    attr_reader :current_status,:current_following,:index
+    #attr_reader :current_status,:current_following,:index
   
     def initialize()#將資料庫的紀錄轉換成當下的追蹤狀態
         #
@@ -12,12 +12,12 @@ class RecommendTxt
         # output: outputlist: arr(2)
         outputlist = []
         sets_table_of_userid = SetsRecords.where(user_id:userid).order(created_at: :desc).limit(num)
+
         if sets_table_of_userid.count < num
             num = sets_table_of_userid.count
         end
 
         for i in (0...num)
-                p i, num
             outputlist.append( [
                 sets_table_of_userid[i].created_at,
                 sets_table_of_userid[i].user_id, 
@@ -35,9 +35,16 @@ class RecommendTxt
         # input: userid: arr ; num: int
         # output: outputlist: arr(2)
         outputlist = []
+
         times_table_of_userid = TimesRecords.where(user_id:userid).order(created_at: :desc).limit(num)
+
+        if times_table_of_userid.count < num
+            num = times_table_of_userid.count
+        end
+
         unless times_table_of_userid.count == 0
             for i in (0...num) 
+                    p times_table_of_userid
                     outputlist.append([
                     times_table_of_userid[i].created_at,
                     times_table_of_userid[i].user_id, 
@@ -52,9 +59,11 @@ class RecommendTxt
     end
 
     def find_txt_recommend (user_id, num = 3)
+        ############ find_txt_recommend ############
         # find out the last num data in both of the table accroding to the follower of user_id
         # input: userid: int ; num: int
         # output: txtlist : arr(2),  [nothing] for no eligible case
+        ############################################
         fsd = FollowStatusData.new()
         friendlist = fsd.get_following(user_id)
         txtlist = find_times_table(friendlist, num) + find_sets_table(friendlist, num)
