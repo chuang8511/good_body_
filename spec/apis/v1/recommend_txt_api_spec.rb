@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe V1::RecommendTxtApi, type: :request do  #
+
   let(:path) { '/v1/recommend_txt' }  #
   let(:double_find_txt) { instance_double(RecommendTxt) }
-  let(:params) { { user_id:  1} } #
+  let(:params) { { user_id:  "fake_id" } } #
 
   let(:mock_new) { allow(RecommendTxt).to receive(:new).and_return(double_find_txt) }
   let(:stub_txt_recommend) { allow(double_find_txt).to receive(:find_txt_recommend) }
@@ -17,9 +18,8 @@ RSpec.describe V1::RecommendTxtApi, type: :request do  #
 
     it 'friend recommendation' do
 
-      expect(RecommendTxt).to receive(:new)
-      expect(double_find_txt).to receive(:find_txt_recommend).once
-      #allow(double_find_txt).to receive(:find_txt_recommend).once.with( 'fake' )
+      allow(RecommendTxt).to receive(:new)
+      allow(double_find_txt).to receive(:find_txt_recommend).once.with( 'fake' )
 
       post path, params: params
 

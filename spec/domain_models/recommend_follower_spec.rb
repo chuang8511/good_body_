@@ -15,7 +15,6 @@ RSpec.describe V1::RecommendFollow, type: :request do
         FollowStatusRecord.create!(subject_user_id:1,action_type:"follow",object_user_id:2)
         FollowStatusRecord.create!(subject_user_id:1,action_type:"follow",object_user_id:3)
         FollowStatusRecord.create!(subject_user_id:2,action_type:"follow",object_user_id:1)
-        
     end
 
     recommd_txt = RecommendFollow.new()
@@ -28,7 +27,6 @@ RSpec.describe V1::RecommendFollow, type: :request do
     it 'check if the numbers of return are fittable' do
         expect(recommd_txt.recomd(1,[2]).length).to eq(1)
         expect(recommd_txt.recomd(1,[2,3]).length).to eq(2)
-
     end
 
   end
