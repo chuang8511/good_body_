@@ -7,7 +7,6 @@ module V1
             end
         
         post do
-            p "gggggg"
             findtxt = RecommendTxt.new()
             txt = findtxt.find_txt_recommend(params[:user_id]) #arr(2)
             #txt = findtxt.find_txt_recommend(2)

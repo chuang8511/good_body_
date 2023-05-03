@@ -1,9 +1,9 @@
 class RecommendFollow
-
-    # very simple random walk recommendation model (non-eqil.)
-
+###################################################################################
+############  very simple random walk recommendation model (non-eqil.) ############ 
+###################################################################################
     ## description: clustering phenomenon is expected
-    ##            : long-term interaction in lave 
+    ##            : long-term interaction performed in remnants
     ##            : small scale system is especially considerate
     ##            : only consider unilateral following relations
 
