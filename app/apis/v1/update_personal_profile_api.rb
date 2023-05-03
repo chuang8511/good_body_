@@ -11,6 +11,7 @@ module V1
             
             
             post do  #get personal info.
+                info_ident = InfoIdentification.new()
                 user = User.find_by(account: params[:account])
                 if (user.nil?)   #testify the existance of the account
                     return {
@@ -19,13 +20,11 @@ module V1
                 else  #personal info. delivery
                     user.update!(height: params[:height],weight: params[:weight],age: params[:age],gender: params[:gender])
                     return {
-                        height:user.height,
-                        weight:user.weight,
-                        age:user.age,
-                        name:user.name,
-                        gender:user.gender
-                        
-                          
+                        height: info_ident.height_testify(user.height),
+                        weight: info_ident.weight_testify(user.weight),
+                        age:    info_ident.age_testify(user.age),
+                        name:   user.name,
+                        gender: user.gender
                     }
                 end
             end
