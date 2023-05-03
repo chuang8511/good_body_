@@ -2,31 +2,31 @@ class FollowStatusData
 
     attr_reader :each_user_following_list,:each_user_follower_list,:index
   
-    def initialize()#將資料庫的紀錄轉換成當下的追蹤狀態
-        @each_user_following_list=Hash.new([]) #每個使用者的追蹤清單
-        @each_user_follower_list=Hash.new([])    #每個使用者的粉絲清單
+    def initialize()#converting following record to following status
+        @each_user_following_list=Hash.new([])   #A list of people who the user is following
+        @each_user_follower_list=Hash.new([])    #A list of people who are following a particular user
         @index=1
         user_number=User.count
 
+        #initializing the 2 lists. Assign an empty array as value to each user id(key)
         1.upto(user_number) do |user_id|
             each_user_following_list[user_id]=Array.new()
             each_user_follower_list[user_id]=Array.new()
         end
-
+        
+        #read and convert records from follow_status_record table, record by record
         FollowStatusRecord.all.each do |record|
             update_one_record(record)
         end
-
-         #應該要是一個hash，內容是目前的追蹤狀態   
+  
     end
 
-    def update_one_record(record)#從資料庫讀取下一筆紀錄，用以更新FollowStatusData     
+    def update_one_record(record)
         
         if record.action_type=="follow"
             each_user_following_list[record.subject_user_id].append(record.object_user_id) 
             each_user_follower_list[record.object_user_id].append(record.subject_user_id)
-            p each_user_following_list[record.subject_user_id]
-            p each_user_following_list[record.object_user_id]
+    
         elsif record.action_type=="unfollow"
             each_user_following_list[record.subject_user_id].delete(record.object_user_id) 
             each_user_follower_list[record.object_user_id].delete(record.subject_user_id)
@@ -36,12 +36,12 @@ class FollowStatusData
             
     end
 
-    def update_record_to_latest()#從資料庫讀取下一筆紀錄，用以更新FollowStatusData
+    def update_record_to_latest()#read new records from DB
 
         record_number=FollowStatusRecord.count
         read_record_number=index-1
         if (record_number-read_record_number)==0
-            p "record list is already the latest" #可能要加錯誤訊息
+            p "record list is already the latest" 
         else
             (record_number-read_record_number).times do
                 update_one_record(FollowStatusRecord.find_by(id:@index))
@@ -69,17 +69,6 @@ class FollowStatusData
     def get_record_number()
         return FollowStatusRecord.all.count
     end
-=begin
-    def individual_records_to_following_list(individual_records)#???
-        individual_following_list=[]
-        individual_records.each do |record|
-            individual_following_list.append(record.object_user_id) if record.action_type=="follow"
-            individual_following_list.delete(record.object_user_id) if record.action_type=="unfollow"
-
-        end
-        return individual_following_list
-    end
-=end
 
 end
 

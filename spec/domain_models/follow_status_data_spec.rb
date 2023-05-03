@@ -47,8 +47,8 @@ RSpec.describe FollowStatusData do
         expect(follow_status_data.get_following(1)).to eq([2])
         expect(follow_status_data.get_following(2)).to eq([3])
     end
-#=begin
-    it 'check if add_follow_status_record is working properly' do #這裡的spec有問題 之後再修
+
+    it 'check if add_follow_status_record is working properly' do 
 
         follow_status_data.add_follow_status_record(1,"follow",3)
         expect(follow_status_data.get_following(1)).to eq([2,3])
