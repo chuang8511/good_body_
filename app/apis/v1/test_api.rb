@@ -20,7 +20,7 @@ module V1
                 if params[:check_point]
                     {
                         test: params[:test_id],
-                        context: "good"
+                        context: "It is a true context"
                     }
                 else
                     {
