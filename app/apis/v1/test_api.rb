@@ -15,11 +15,6 @@ module V1
                 TestUser.create!(name: "chunhao",
                 identifier: params[:test_id],
                 registration_datetime: Time.now)
-
-                
-                ii = RecommendTxt.new()
-                #p ii.find_sets_table (1)
-                p ii.find_txt_recommend (2)
                 
 
                 if params[:check_point]
