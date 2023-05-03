@@ -22,6 +22,13 @@ class RegisterAccountUser
         phone_number_duplicated!(@phone_number)
         phone_number_format_wrong!(@phone_number)
         phone_number_invalid!(@phone_number)
+
+        #encrypt the password
+=begin
+        key   = ActiveSupport::KeyGenerator.new("2").generate_key("1",32)
+        crypt = ActiveSupport::MessageEncryptor.new(key)
+        @password=crypt.encrypt_and_sign(@password)
+=end    
         User.create!(account:@account,password:@password,name:@name,phone_number:@phone_number,height:@height,weight:@weight,age:@age,email:@email,gender: @gender)
 
     end

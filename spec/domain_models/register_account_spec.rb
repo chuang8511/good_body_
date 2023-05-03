@@ -53,8 +53,7 @@ RSpec.describe RegisterAccountUser do
         context "operation failed because email is used by other account" do
     
             it 'got EmailDuplicatedError ' do
-              
-              p User.find_by(email: test_mail1)
+            
               expect { create_account[instance[test_account2,test_mail1,valid_test_phone_number2]] }.to raise_error(EmailDuplicatedError, /#{test_mail1} is already used by other account/)
             end
       
