@@ -18,6 +18,8 @@ class RecommendFollow
             # generate the next step (inner)
             user_number = User.count
             fsd = FollowStatusData.new()
+
+=begin
             unless fsd.get_following(t).nil?
                 next_s_list = fsd.get_following(t)  - [ subject_user_id ] - exclusive
             else
@@ -35,6 +37,26 @@ class RecommendFollow
             else
                 return next_s_list[rand(next_s_list.length)]
             end
+=end
+
+            unless fsd.get_following(t).nil?
+                next_s_list = fsd.get_following(t)  - [ subject_user_id ] - exclusive
+            else
+                next_s_list = (1..User.count).to_a - [subject_user_id] - exclusive - fsd.get_following(subject_user_id)
+                return next_s_list[ rand( next_s_list.length ) ]
+            end
+
+            unless t == subject_user_id 
+                next_s_list = next_s_list - fsd.get_following(subject_user_id)
+            end
+        
+            if next_s_list.length == 0 or next_s_list.length.nil?
+                next_s_list = (1..User.count).to_a - [subject_user_id] - exclusive - fsd.get_following(subject_user_id)
+                return next_s_list[ rand( next_s_list.length ) ]
+            else
+                return next_s_list[rand(next_s_list.length)]
+            end
+
     end
 
     def random_walk(subject_user_id, order, exclusive)
