@@ -21,21 +21,6 @@ class FollowStatusData
   
     end
 
-    def update_one_record(record)
-        
-        if record.action_type=="follow"
-            each_user_following_list[record.subject_user_id].append(record.object_user_id) 
-            each_user_follower_list[record.object_user_id].append(record.subject_user_id)
-    
-        elsif record.action_type=="unfollow"
-            each_user_following_list[record.subject_user_id].delete(record.object_user_id) 
-            each_user_follower_list[record.object_user_id].delete(record.subject_user_id)
-            
-        end
-        @index+=1
-            
-    end
-
     def update_record_to_latest()#read new records from DB
 
         record_number=FollowStatusRecord.count
@@ -69,6 +54,22 @@ class FollowStatusData
     def get_record_number()
         return FollowStatusRecord.all.count
     end
+
+private
+def update_one_record(record)
+        
+    if record.action_type=="follow"
+        each_user_following_list[record.subject_user_id].append(record.object_user_id) 
+        each_user_follower_list[record.object_user_id].append(record.subject_user_id)
+
+    elsif record.action_type=="unfollow"
+        each_user_following_list[record.subject_user_id].delete(record.object_user_id) 
+        each_user_follower_list[record.object_user_id].delete(record.subject_user_id)
+        
+    end
+    @index+=1
+        
+end
 
 end
 
