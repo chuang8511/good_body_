@@ -33,17 +33,3 @@ class LoginUser
 
 end
 
-# todo: It would be better to arrange in another place.
-# class NoUserError < StandardError
-#   def initialize(account_number)
-#     msg = "There is no #{account_number} user"
-#     super(msg)
-#   end
-# end
-
-# class WrongPasswordError < StandardError
-#   def initialize
-#     msg = "Password is wrong"
-#     super(msg)
-#   end
-# end

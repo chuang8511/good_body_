@@ -2,18 +2,18 @@ require_relative 'common_error'
 
 class RecordTimeCreate
 
-    attr_accessor :user_id, :contents, :duration, :distance, :user
+    attr_accessor :user_id, :contents, :duration, :distance #:user
     
     def initialize(user_id, contents, duration, distance)
         @user_id             = user_id
         @contents            = contents
         @duration            = duration
         @distance            = distance
-        @user                = User.find_by(id: user_id)
+        # @user                = User.find_by(id: user_id)
     end 
 
     def create_time_record #新增time-based的健身紀錄
-        no_user_found!
+        # no_user_found!
         content_not_valid!
         duration_not_valid!
         distance_not_valid!
@@ -22,9 +22,9 @@ class RecordTimeCreate
 
     private
 
-    def no_user_found!
-        raise NoUseridError.new if user.blank?
-    end
+    # def no_user_found!
+    #     raise NoUseridError.new if user.blank?
+    # end
 
     def content_not_valid! 
         raise NoContentError.new if contents.blank? 
