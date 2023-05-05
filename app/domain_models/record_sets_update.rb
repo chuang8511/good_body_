@@ -15,7 +15,7 @@ class RecordSetsUpdate
     end
 
     def update_set_record
-        id_not_found!
+        record_not_found!
         content_is_wrong!
         set_is_wrong!
         rep_is_wrong!
@@ -26,7 +26,7 @@ class RecordSetsUpdate
 
     private
 
-    def id_not_found!
+    def record_not_found!
         raise NoIdError.new(id) if id_set.blank?
     end
 

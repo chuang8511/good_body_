@@ -2,7 +2,7 @@ require_relative 'common_error'
 
 class RecordSetsCreate
 
-    attr_accessor :user_id, :user, :content, :set, :rep, :weight
+    attr_accessor :user_id, :content, :set, :rep, :weight #, :user
 
     def initialize(user_id, content, set, rep, weight)
         @user_id = user_id
@@ -10,11 +10,11 @@ class RecordSetsCreate
         @set = set
         @rep = rep
         @weight = weight
-        @user = User.find_by(id: user_id)
+        # @user = User.find_by(id: user_id)
     end
 
     def create_set_record
-        user_not_found!
+        # user_not_found!
         content_is_wrong!
         set_is_wrong!
         rep_is_wrong!
@@ -24,9 +24,9 @@ class RecordSetsCreate
 
     private
 
-    def user_not_found!
-        raise NoUseridError.new if user.blank?
-    end
+    # def user_not_found!
+    #     raise NoUseridError.new if user.blank?
+    # end
 
     def content_is_wrong!
         raise NoContentError.new if content.blank?
