@@ -1,0 +1,3 @@
+class TimesRecord < ApplicationRecord
+
+end
