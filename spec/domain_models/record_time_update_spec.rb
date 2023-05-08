@@ -39,7 +39,7 @@ RSpec.describe RecordTimeUpdate do
             it 'raise no record found error' do
                 expect{
                     initialize_instance[invalid_id, contents, duration, distance].update_time_record
-                }.to raise_error(NoIdError)
+                }.to raise_error(NoIdError, /Record ID does not exist./)
             end
         end
 
@@ -47,7 +47,7 @@ RSpec.describe RecordTimeUpdate do
             it 'raise no content error' do
                 expect{
                     initialize_instance[id, invalid_contents, duration, distance].update_time_record
-                }.to raise_error(NoContentError)
+                }.to raise_error(NoContentError, /The content input is invalid, please modify it./)
             end
         end
 
@@ -55,7 +55,7 @@ RSpec.describe RecordTimeUpdate do
             it 'raise no duration error' do 
                 expect{
                     initialize_instance[id, contents, invalid_duration, distance].update_time_record
-                }.to raise_error(NoDurationError)
+                }.to raise_error(NoDurationError, /Your input: #{invalid_duration} is invalid, please modify it./)
             end
         end
 
@@ -63,7 +63,7 @@ RSpec.describe RecordTimeUpdate do
             it 'raise no distance error' do
                 expect{
                     initialize_instance[id, contents, duration, invalid_distance].update_time_record
-                }.to raise_error(NoDistanceError)
+                }.to raise_error(NoDistanceError, /Your input: #{invalid_distance} is invalid, please modify it./)
             end
         end
 
@@ -74,12 +74,11 @@ RSpec.describe RecordTimeUpdate do
         end
 
         context "when the content is the same" do
-            it 'raise same content error' do
+            it 'raise same params error' do
                 expect{
                     initialize_instance[id, time_record.contents, time_record.duration, time_record.distance].update_time_record
-                }.to raise_error(SameParamsError)
+                }.to raise_error(SameParamsError, /Your new update is same as the former one./)
             end
-            
         end
 
         before do
@@ -88,7 +87,7 @@ RSpec.describe RecordTimeUpdate do
 
         context "succeed to update a record" do
             it 'update the record' do 
-                allow(RecordTimeRepository).to receive(:update).and_return(true)
+                expect(RecordTimeRepository).to receive(:update).and_return(true)
                 result = initialize_instance[time_record, contents, duration, distance].update_time_record
                 expect(result).to eq(true)
             end

@@ -13,14 +13,6 @@ class WrongPasswordError < StandardError
     end
 end
 
-# User_id / ID
-# class NoUseridError < StandardError
-#     def initialize
-#         msg = "User does not exist."
-#         super(msg)
-#     end
-# end
-
 class NoIdError < StandardError
     def initialize
         msg = "Record ID does not exist."

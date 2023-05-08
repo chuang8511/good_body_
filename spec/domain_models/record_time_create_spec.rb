@@ -55,7 +55,7 @@ RSpec.describe RecordTimeCreate do
 
         context "succeed to create a time record" do 
             it 'succeed to create a time record' do
-                allow(RecordTimeRepository).to receive(:create).and_return(true)
+                expect(RecordTimeRepository).to receive(:create).and_return(true)
                 result = initialize_instance[user_id, contents, duration, distance].create_time_record
                 expect(result).to eq(true)
             end

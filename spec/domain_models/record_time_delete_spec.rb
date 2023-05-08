@@ -31,13 +31,13 @@ RSpec.describe RecordTimeDelete do
             it 'raise no record found error' do
                 expect{
                     initialize_instance[invalid_id].delete_time_record
-                }.to raise_error(NoIdError)
+                }.to raise_error(NoIdError, /Record ID does not exist./ )
             end
         end
 
         context "when record exists" do 
             it 'delete the time record' do
-                allow(RecordTimeRepository).to receive(:delete).and_return(true)
+                expect(RecordTimeRepository).to receive(:delete).and_return(true)
                 result = initialize_instance[id].delete_time_record
                 expect(result).to eq(true)
             end

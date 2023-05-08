@@ -9,7 +9,7 @@ class RecordTimeDelete
       @time_record = TimesRecord.find_by(id: id)
    end 
  
-   def delete_time_record #刪除現存的紀錄
+   def delete_time_record 
       no_record_found!
       delete_time_succeed
    end

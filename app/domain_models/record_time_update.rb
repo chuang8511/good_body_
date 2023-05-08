@@ -12,7 +12,7 @@ class RecordTimeUpdate
        @time_record  = TimesRecord.find_by(id: id)
    end 
 
-   def update_time_record #修改現有的紀錄
+   def update_time_record 
       no_record_found!
       content_not_valid!
       duration_not_valid!
