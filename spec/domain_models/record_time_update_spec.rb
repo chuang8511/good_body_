@@ -20,6 +20,16 @@ RSpec.describe RecordTimeUpdate do
         allow(TimesRecord).to receive(:find_by).and_return(time_record)
     end
 
+    describe "#initialize" do
+        it 'generate a update instance with attributes' do
+            update_instance = initialize_instance[id, contents, duration, distance]
+            expect(update_instance.id).to eq(id)
+            expect(update_instance.contents).to eq(contents)
+            expect(update_instance.duration).to eq(duration)
+            expect(update_instance.distance).to eq(distance)
+        end
+    end
+
     describe "#update_time_record" do
         context "when record is blank" do
             before do
