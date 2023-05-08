@@ -1,47 +1,68 @@
 require 'rails_helper'
-# require_relative 'shared_examples.rb'
 
-RSpec.describe RecordSetsCreate do
+RSpec.describe RecordSetsUpdate do
 
     let(:initialize_instance) {
-        -> (user_id, content, set, rep, weight) { RecordSetsCreate.new(user_id, content, set, rep, weight) }
+        -> (id, content, set, rep, weight) { RecordSetsUpdate.new(id, content, set, rep, weight) }
     }
-    let(:set_record) {
-        initialize_instance['fake_user_id', 'fake_content', 1, 1, 1]
-    }
+
+    let(:set_record) { initialize_instance[1, 'fake_content', 1, 1, 1] }
+
+    # let(:id_set) { SetsRecord.new(id: 1, contents: 'fake_content', sets: 1, reps: 1, weight: 1) }
+
+    before do
+        allow(SetsRecord).to receive(:find_by).and_return(set_record)
+    end
 
     describe "#initialize" do
 
         it 'generate a new RecordSet with attributes' do
-
-            expect(set_record.user_id).to eq('fake_user_id')
+            
+            expect(set_record.id).to eq(1)
             expect(set_record.content).to eq('fake_content')
             expect(set_record.set).to eq(1)
             expect(set_record.rep).to eq(1)
             expect(set_record.weight).to eq(1)
+
         end
+
+        # it 'finds the record by id' do
+        #     expect(SetsRecord).to receive(:find_by).with(id: 1).and_return(set_record)
+        #     set_record.update_set_record
+        # end
     end
 
 
-    describe '#create_set_record' do
+    describe '#update_set_record' do
 
+        context 'when record is not found' do
+            before do
+              set_record.instance_variable_set(:@id, nil)
+            end
+        
+            it 'raises NoIdError' do
+              expect { set_record.update_set_record }.to raise_error(NoIdError, /Record ID does not exist./)
+            end
+        
+        end
+        
         context 'when content is blank' do
             before do
                 set_record.instance_variable_set(:@content, '')
             end
-            
+        
             it 'raises NoContentError' do
-                expect { set_record.create_set_record}.to raise_error(NoContentError, /The content input is invalid, please modify it./)
+              expect { set_record.update_set_record }.to raise_error(NoContentError, /The content input is invalid, please modify it./)
             end
+
         end
 
-        
         context 'when set is blank or invalid' do
 
             shared_examples 'invalid set' do |set|
                 it "raises NoSetError with #{set} set" do
                   set_record.instance_variable_set(:@set, set)
-                  expect { set_record.create_set_record }.to raise_error(NoSetError, /Your input: #{set} is invalid, please modify it./)
+                  expect { set_record.update_set_record }.to raise_error(NoSetError, /Your input: #{set} is invalid, please modify it./)
                 end
             end
 
@@ -57,7 +78,7 @@ RSpec.describe RecordSetsCreate do
             shared_examples 'invalid rep' do |rep|
                 it "raises NoRepError with #{rep} rep" do
                   set_record.instance_variable_set(:@rep, rep)
-                  expect { set_record.create_set_record }.to raise_error(NoRepError, /Your input: #{rep} is invalid, please modify it./)
+                  expect { set_record.update_set_record }.to raise_error(NoRepError, /Your input: #{rep} is invalid, please modify it./)
                 end
             end
 
@@ -72,7 +93,7 @@ RSpec.describe RecordSetsCreate do
             shared_examples 'invalid weight' do |weight|
                 it "raises NoWeightError with #{weight} weight" do
                   set_record.instance_variable_set(:@weight, weight)
-                  expect { set_record.create_set_record }.to raise_error(NoWeightError, /Your input: #{weight} is invalid, please modify it./)
+                  expect { set_record.update_set_record }.to raise_error(NoWeightError, /Your input: #{weight} is invalid, please modify it./)
                 end
             end
 
@@ -83,12 +104,18 @@ RSpec.describe RecordSetsCreate do
 
         end
 
+        context 'when all params are same' do
+            it 'raises SameParamsError' do
+                
+            end
+        
+        end
+
+
         context 'when all input data are valid' do
-            it 'creates a new RecordSet' do
-                # expect(set_record.create_set_record).to be true
-                # expect {set_record.create_set_record}.to change {RecordSetRepository.all.length}.by(1)
-                allow(RecordSetRepository).to receive(:create_set_record).and_return(true)
-                result = set_record.create_set_record
+            it 'updates a new RecordSet' do
+                allow(RecordSetRepository).to receive(:update_set_record).and_return(true)
+                result = set_record.update_set_record
                 expect(result).to eq(true)
             end
         end

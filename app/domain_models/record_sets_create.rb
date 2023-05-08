@@ -41,7 +41,7 @@ class RecordSetsCreate
     end
 
     def weight_is_wrong!
-        raise NoWeightError.new(weight) if weight.blank? || weight ==0 || weight.negative? || weight > 300
+        raise NoWeightError.new(weight) if weight.blank? || weight == 0 || weight.negative? || weight > 300
 
     end
     

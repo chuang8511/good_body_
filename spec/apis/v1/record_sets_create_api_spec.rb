@@ -13,7 +13,7 @@ RSpec.describe V1::RecordSetsCreateApi, type: :request do
             allow(RecordSetsCreate).to receive(:new).and_return(record_set)
         end
         
-        it 'will initialize RecordTimeCreateSpec' do
+        it 'will initialize RecordSetCreateSpec' do
             expect(RecordSetsCreate).to receive(:new).once.with(1, "push-up", 4, 12,40)
             post path, params: params
         end
