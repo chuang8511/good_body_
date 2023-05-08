@@ -20,7 +20,7 @@ RSpec.describe V1::RecordTimeUpdateApi, type: :request do
         end
 
 
-        it 'will get status 201' do
+        it 'will get status 200' do
             put path, params: params
             expect(response.status).to eq 200
         

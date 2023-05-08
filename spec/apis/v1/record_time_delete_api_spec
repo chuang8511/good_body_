@@ -18,7 +18,7 @@ RSpec.describe V1::RecordTimeDeleteApi, type: :request do
         end
 
 
-        it 'will get status 201' do
+        it 'will get status 200' do
             delete path, params: params
             expect(response.status).to eq 200
         
