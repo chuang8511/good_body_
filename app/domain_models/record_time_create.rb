@@ -9,11 +9,9 @@ class RecordTimeCreate
         @contents            = contents
         @duration            = duration
         @distance            = distance
-        # @user                = User.find_by(id: user_id)
     end 
 
     def create_time_record #新增time-based的健身紀錄
-        # no_user_found!
         content_not_valid!
         duration_not_valid!
         distance_not_valid!
@@ -21,10 +19,6 @@ class RecordTimeCreate
     end
 
     private
-
-    # def no_user_found!
-    #     raise NoUseridError.new if user.blank?
-    # end
 
     def content_not_valid! 
         raise NoContentError.new if contents.blank? 

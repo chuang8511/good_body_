@@ -8,17 +8,11 @@ RSpec.describe RecordTimeCreate do
 
     let(:user_id) { 1 }
     let(:contents) { "Swimming" }
-    let(:invalid_contents) {""}
+    let(:invalid_contents) { "" }
     let(:duration) { 300 }
-    let(:invalid_duration) {0}
+    let(:invalid_duration) { 0 }
     let(:distance) { 2.5 }
-    let(:invalid_distance) {-1.5}
-    # let(:user) { instance_double(User, blank?: false) }
-
-
-    # before do
-    #     allow(User).to receive(:find_by).and_return(user)
-    # end
+    let(:invalid_distance) { -1.5 }
 
     describe "#initialize" do
 
@@ -34,16 +28,7 @@ RSpec.describe RecordTimeCreate do
     end 
 
     describe "#create_time_record" do
-        
-        # context "failed to create due to unmatch user" do
-        #     it 'get no user error' do
-        #         allow(User).to receive(:find_by).and_return(nil)
-        #         expect {
-        #             initialize_instance[user_id, contents, duration, distance].create_time_record
-        #           }.to raise_error(NoUseridError, "User does not exist.")                    
-        #     end
-        # end
-
+    
         context "failed to create due to unvalid content" do
             it 'get no content error' do
                 expect {
@@ -66,7 +51,6 @@ RSpec.describe RecordTimeCreate do
                     initialize_instance[user_id, contents, duration, invalid_distance].create_time_record
                 }.to raise_error(NoDistanceError, "Your input: #{invalid_distance} is invalid, please modify it.")
             end
-            
         end
 
         context "succeed to create a time record" do 
@@ -75,9 +59,6 @@ RSpec.describe RecordTimeCreate do
                 result = initialize_instance[user_id, contents, duration, distance].create_time_record
                 expect(result).to eq(true)
             end
-            
         end
-
     end
-
 end
