@@ -8,10 +8,10 @@ RSpec.describe RecordSetsUpdate do
 
     let(:set_record) { initialize_instance[1, 'fake_content', 1, 1, 1] }
 
-    # let(:id_set) { SetsRecord.new(id: 1, contents: 'fake_content', sets: 1, reps: 1, weight: 1) }
+    let(:id_set) { SetsRecord.new(id: 1, contents: 'fake_content', sets: 1, reps: 1, weight: 1) }
 
     before do
-        allow(SetsRecord).to receive(:find_by).and_return(set_record)
+        allow(SetsRecord).to receive(:find_by).and_return(id_set)
     end
 
     describe "#initialize" do
@@ -26,10 +26,6 @@ RSpec.describe RecordSetsUpdate do
 
         end
 
-        # it 'finds the record by id' do
-        #     expect(SetsRecord).to receive(:find_by).with(id: 1).and_return(set_record)
-        #     set_record.update_set_record
-        # end
     end
 
 
@@ -37,11 +33,11 @@ RSpec.describe RecordSetsUpdate do
 
         context 'when record is not found' do
             before do
-              set_record.instance_variable_set(:@id, nil)
+                allow(SetsRecord).to receive(:find_by).and_return(nil)
             end
-        
+          
             it 'raises NoIdError' do
-              expect { set_record.update_set_record }.to raise_error(NoIdError, /Record ID does not exist./)
+                expect { set_record.update_set_record }.to raise_error(NoIdError, /Record ID does not exist./)
             end
         
         end
@@ -106,18 +102,22 @@ RSpec.describe RecordSetsUpdate do
 
         context 'when all params are same' do
             it 'raises SameParamsError' do
-                
+                expect { set_record.update_set_record }.to raise_error(SameParamsError,/Your new update is same as the former one./)
             end
         
         end
 
-
         context 'when all input data are valid' do
-            it 'updates a new RecordSet' do
-                allow(RecordSetRepository).to receive(:update_set_record).and_return(true)
-                result = set_record.update_set_record
-                expect(result).to eq(true)
+
+            it 'updates the set record' do
+                expect(RecordSetRepository).to receive(:update_set_record).with(id_set, 'new_content', 10, 20, 30)
+                set_record.content = 'new_content'
+                set_record.set = 10
+                set_record.rep = 20
+                set_record.weight = 30
+                set_record.update_set_record
             end
+            
         end
     end
 end
