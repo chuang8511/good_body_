@@ -8,7 +8,7 @@ module V1
         
         post do
             findfriend = RecommendFollow.new()
-            friend_recomd = findfriend.recomd( params[:user_id], [2,3,4] )
+            friend_recomd = findfriend.recomd( params[:user_id], [4,3,2] )
             {
                 follower1: friend_recomd[0], 
                 follower2: friend_recomd[1], 
