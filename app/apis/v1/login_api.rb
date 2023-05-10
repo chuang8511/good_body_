@@ -18,6 +18,8 @@ module V1
 
         login_user.login(params[:password])
 
+        LoginRepository.save!(login_user)
+
       end
 
     end
