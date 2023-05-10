@@ -1,0 +1,3 @@
+class  FollowStatusRecord< ApplicationRecord
+
+end

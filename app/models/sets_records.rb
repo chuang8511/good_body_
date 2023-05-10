@@ -1,0 +1,3 @@
+class SetsRecords < ApplicationRecord
+
+end

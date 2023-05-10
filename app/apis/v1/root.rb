@@ -9,6 +9,8 @@ module V1
     mount V1::TestApi
     mount V1::LoginApi
     mount V1::RegisterAccountApi
+    mount V1::RecommendFollowerApi
+    mount V1::RecommendTxtApi
 
   end
 
