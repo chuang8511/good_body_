@@ -14,7 +14,7 @@ RSpec.describe FollowAndUnfollowUser do
           FollowStatusRecord.create!(subject_user_id:1,action_type:"follow",object_user_id:2)
           FollowStatusRecord.create!(subject_user_id:2,action_type:"follow",object_user_id:1)
           follow_user = initialize_instance["111"]
-          expect(follow_user.follow_status_data).is_a?(FollowStatusData)
+          expect(follow_user.follow_list).is_a?(PersonalFollowListsRepository)
           expect(follow_user.subject_user_id).to eq(1)
         end
       end
