@@ -39,3 +39,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
+
+config.consider_all_requests_local = true
+config.action_view.raise_on_missing_translations = true
+config.action_controller.allow_forgery_protection = true

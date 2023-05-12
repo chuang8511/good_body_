@@ -1,0 +1,19 @@
+
+<h1>Welcome to Login Page</h1>
+<%= form_with(url: v1_login_path) do |f| %>
+  <%= f.hidden_field :authenticity_token %>
+
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </p>
+  
+  <%= f.submit 'Login' %>
+<% end %>
+
+<%= csrf_meta_tags %>
+
