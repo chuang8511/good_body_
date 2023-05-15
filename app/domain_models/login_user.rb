@@ -17,6 +17,10 @@ class LoginUser
     succeed_to_login
   end
 
+  def is_logged_in?
+    @is_login
+  end
+  
   private
 
   def no_user_found!

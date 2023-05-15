@@ -16,17 +16,16 @@ class LoginController < ApplicationController
         end
         
         # 呼叫 V1::LoginApi 的 login API
-        status, headers, body = V1::LoginApi.call({email: email, password: password})
-        
+        response = ApiCaller.call_api('post', '1', 'login', {email: email, password: password})
+        status_code = response[0]
+
+
         # 檢查 API 回傳的狀態碼，若為 200 則表示登入成功，否則登入失敗。
-        if status == 200
-            # 登入成功，導向首頁
+        if status_code == 200
             flash[:success] = 'Succeed to login'
             render :create_success
-            # redirect_to root_path
         else
-            # 登入失敗，導向登入頁面，顯示錯誤訊息
-            flash.now[:error] = 'Fail to login'
+            flash.now[:error] = "Login failed, error code: #{status_code} #{response}"
             render :new
         end
 
