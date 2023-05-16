@@ -2,5 +2,6 @@
 <% if @result['result'] == 'success' %>
   <p>Your form submission was successful!</p>
 <% else %>
+  <p><%= flash[:error] %></p>
   <p>An error occurred during form submission.</p>
 <% end %>

@@ -5,8 +5,31 @@ class RegisterAccountController < ApplicationController
         
     end
 
+    def new
+    end
+
     def submit
-        #create_account(params[:account],params[:password],params[:email],params[:phone_number],params[:name],params[:gender],params[:age],params[:height],params[:weight])
+
+
+
+
+      response = ApiCaller.call_api('post', '1', 'register_account', {account:params[:account],password:params[:password],name:params[:name],email:params[:email],phone_number:params[:phone_number],age:params[:age],gender:params[:gender],height:params[:height],weight:params[:weight]})
+      status_code = response[0]
+
+      if status_code == 200
+          flash[:success] = 'Success'
+          @result = response[1]
+          render :create_success
+      else
+          flash.now[:error] = "Failed to create account, error code: #{status_code} #{response[1]}"
+          @result = response[1]
+          render :show
+      end
+
+      flash[:error] = nil
+    end
+=begin
+      #create_account(params[:account],params[:password],params[:email],params[:phone_number],params[:name],params[:gender],params[:age],params[:height],params[:weight])
         form_data = params
 
         uri = URI.parse('http://localhost:3000/v1/register_account')
@@ -37,4 +60,5 @@ class RegisterAccountController < ApplicationController
         "http://localhost:3000/v1/register_account/#{URI.encode(name)}"
       )
     end
+=end
 end
