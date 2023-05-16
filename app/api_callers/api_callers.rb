@@ -1,3 +1,4 @@
+=begin
 require 'net/http'
 require 'uri'
 require 'json'
@@ -33,3 +34,4 @@ class ApiCaller
     end
   end
 end
+=end

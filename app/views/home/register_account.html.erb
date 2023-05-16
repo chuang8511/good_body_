@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE>Forms Examples</TITLE>
+
+<STYLE TYPE="text/css">
+/* CH class is ColoredHeads */
+all.CH {color:#40C080;}
+</STYLE>
+</HEAD>
+
+<BODY BGCOLOR=white>
+
+
+<H1 CLASS=CH> S&E Notebook </H1>
+
+<BR>
+<HR>
+
+<h1> Create New Account </h1>
+
+<%= form_tag '/hello/register_account' do %>
+    name: <%= text_field_tag 'name' %> <br /> 
+    account: <%= text_field_tag 'account' %> <br /> 
+    password:<%= text_field_tag 'password' %> <br />
+    phone_number:<%= text_field_tag 'phone_number' %> <br />
+    height:<%= text_field_tag 'height' %> cm <br />
+    weight:<%= text_field_tag 'weight' %> kg <br />
+    age:<%= text_field_tag 'age' %> <br />
+    email:<%= text_field_tag 'email' %> <br />
+    gender:<%= text_field_tag 'gender' %> <br />
+  <%= submit_tag "sign up" %>
+<% end %>
+
+<BR>
+<HR>
