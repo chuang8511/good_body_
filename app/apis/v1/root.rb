@@ -9,6 +9,9 @@ module V1
     mount V1::TestApi
     mount V1::LoginApi
     mount V1::RegisterAccountApi
+    mount V1::RecordTimeCreateApi
+    mount V1::RecordTimeUpdateApi
+    mount V1::RecordTimeDeleteApi
 
   end
 
