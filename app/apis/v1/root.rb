@@ -11,7 +11,12 @@ module V1
     mount V1::RecordTimeCreateApi
     mount V1::RecordTimeUpdateApi
     mount V1::RecordTimeDeleteApi
+    mount V1::RecordSetsCreateApi
+    mount V1::RecordSetsUpdateApi
+    mount V1::RecordSetsDeleteApi
+    mount V1::RecordSetsViewApi
 
+#       
   end
 
 end
