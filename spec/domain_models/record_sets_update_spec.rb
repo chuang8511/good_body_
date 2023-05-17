@@ -8,7 +8,7 @@ RSpec.describe RecordSetsUpdate do
 
     let(:set_record) { initialize_instance[1, 'fake_content', 1, 1, 1] }
 
-    let(:id_set) { SetsRecord.new(id: 1, contents: 'fake_content', sets: 1, reps: 1, weight: 1) }
+    let(:id_set) { SetsRecord.new(user_id: 1, contents: 'fake_content', sets: 1, reps: 1, weight: 1) }
 
     before do
         allow(SetsRecord).to receive(:find_by).and_return(id_set)
