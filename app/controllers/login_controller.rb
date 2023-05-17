@@ -1,3 +1,7 @@
+require 'uri'
+require 'net/http'
+require_relative '../domain_models/common_error'
+
 class LoginController < ApplicationController
 
   def index
@@ -5,15 +9,21 @@ class LoginController < ApplicationController
 
   def login
 
-    response = ApiCaller.call_api('post', '1','login', { email: params[:email], password: params[:password] })
+    email = params[:email].strip
 
-    if response[:code] == 200
-      redirect_to root_url, notice: "Logged in!"
-      
+    password = params[:password].strip
+
+    uuid = SecureRandom.uuid
+
+    login_user = LoginUser.new(uuid, email)
+
+    if login_user.login(password)
+      session[:account] = params[:account]
+      render :show
     else
-      flash.now[:error] = "Email or password is invalid. #{response}"
       render :index
     end
+
 
   end
 end
