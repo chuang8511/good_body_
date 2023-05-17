@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   mount EndpointResource => '/'
   
   root to: 'register_account#index'
-  post '/submit' => 'register_account#submit'
+  post '/register' => 'register_account#register'
   
 end

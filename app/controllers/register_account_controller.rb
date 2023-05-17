@@ -7,7 +7,7 @@ class RegisterAccountController < ApplicationController
     end
 
 
-    def submit
+    def register
         @register_account_user=RegisterAccountUser.new(params[:account],params[:password],params[:name],params[:email],params[:phone_number],params[:age],params[:gender],params[:height],params[:weight])
         
 
@@ -20,10 +20,5 @@ class RegisterAccountController < ApplicationController
           render :index
       end
     end
-=begin
-    private
-    def user_params
-      params.require(:user).permit(:account,:email,:password,:name,:phone_number,:gender, :age, :height, :weight)
-    end
-=end
+
 end
