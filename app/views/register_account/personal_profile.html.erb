@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<TITLE>Forms Examples</TITLE>
+
+<STYLE TYPE="text/css">
+/* CH class is ColoredHeads */
+all.CH {color:#40C080;}
+</STYLE>
+</HEAD>
+
+<BODY BGCOLOR=white>
+
+<!--
+<H1 CLASS=CH> S&E Notebook </H1>
+-->
+
+<BR>
+<HR>
+
+<h1> Your personal profile </h1>
+
+<body bgcolor="#CCCCCC" alink="#FFFFFF">
+height: <%= @height %> cm  <br> 
+weight: <%= @weight %> kg  <br> 
+age: <%= @age %> years old  <br> 
+gender: <%= @gender %><br> 
+</body>
+
+<input type="button" value="update" onclick="location.href='http://127.0.0.1:3000/update'">
+
+<BR>
+<HR>
