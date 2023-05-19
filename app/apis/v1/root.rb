@@ -12,7 +12,6 @@ module V1
     mount V1::RecordSetsCreateApi
     mount V1::RecordSetsUpdateApi
     mount V1::RecordSetsDeleteApi
-    mount V1::RecordSetsViewApi
 
   end
 

@@ -54,6 +54,7 @@ class RecordSetsUpdate
 
     def succeed_to_update_set
         RecordSetRepository.update_set_record(id_set, content, set, rep, weight)
+        true
     end
 
 end
