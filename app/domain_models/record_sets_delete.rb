@@ -15,7 +15,7 @@ class RecordSetsDelete
     end
 
     def record_not_found!
-      raise NoIdError.new(id) if id_set.blank?
+      raise NoIdError.new if id_set.blank?
     end
 
     def succeed_to_delete_set
