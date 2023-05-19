@@ -17,14 +17,26 @@ class LoginController < ApplicationController
 
     login_user = LoginUser.new(uuid, email)
 
-    if login_user.login(password)
-      session[:account] = params[:account]
-      render :show
-    else
+    begin
+
+      if login_user.login(password)
+        session[:account] = params[:account]
+        render :homepage
+      end
+
+    rescue NoUserError
+
+      flash.now[:notice] = 'Wrong Email. Please try again'
+
       render :index
+
+    rescue WrongPasswordError
+
+      flash.now[:notice] = 'Wrong Password. Please try again'
+
+      render :index
+    
     end
-
-
   end
 end
 

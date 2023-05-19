@@ -1,5 +1,4 @@
 <h1>Welcome to Login Page</h1>
-  <%= csrf_meta_tags %>
 <%= form_tag v1_login_path do %>
   <p>
     <%= label_tag :email %><br>
@@ -11,8 +10,8 @@
   </p>
   <%= submit_tag "Login" %>
 <% end %>
-<% if flash[:error] %>
-  <p><%= flash[:error] %></p>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
 
 <% end %>
 
