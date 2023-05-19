@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2023_04_19_031204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "sets_records", id: false, force: :cascade do |t|
+  create_table "sets_records", force: :cascade do |t|
     t.integer "user_id"
     t.string "contents"
     t.integer "sets"
@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(version: 2023_04_19_031204) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "times_records", id: false, force: :cascade do |t|
+  create_table "times_records", force: :cascade do |t|
     t.integer "user_id"
     t.string "contents"
     t.integer "duration"
+    t.float "distance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

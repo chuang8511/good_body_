@@ -1,3 +1,5 @@
+require_relative 'common_error'
+
 class LoginUser
 
   attr_reader :uuid, :account_number, :user, :is_login
@@ -22,26 +24,11 @@ class LoginUser
   end
 
   def password_is_wrong!(password)
-    raise WrongPasswordError.new if user.password != password # I do not consider the security here. Please think about how to make it better.
+    raise WrongPasswordError.new if user.password != password #I do not consider the security here. Please think about how to make it better.
   end
 
   def succeed_to_login
     @is_login = true
   end
 
-end
-
-# todo: It would be better to arrange in another place.
-class NoUserError < StandardError
-  def initialize(account_number)
-    msg = "There is no #{account_number} user"
-    super(msg)
-  end
-end
-
-class WrongPasswordError < StandardError
-  def initialize
-    msg = "Password is wrong"
-    super(msg)
-  end
 end
