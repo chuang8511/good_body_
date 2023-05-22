@@ -1,0 +1,21 @@
+
+<h1>Edit Times Fitness Record</h1>
+
+<%= form_with(model: @times_record, url: update_times_record_path(@times_record.id), method: :patch) do |form| %>
+  <%= form.label :contents %>
+  <%= form.text_field :contents %>
+  
+  <%= form.label :duration %>
+  <%= form.number_field :duration %>
+  
+  <%= form.label :distance %>
+  <%= form.number_field :distance %>
+  
+  <%= form.submit 'Save' %>
+
+<% end %>
+
+  <% if flash[:error] %>
+  <p><%= flash[:error] %></p>
+  <% end %>
+  
