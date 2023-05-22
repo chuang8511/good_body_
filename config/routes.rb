@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   get '/v1/login', to: 'login#index'
   post '/v1/login', to: 'login#login'
 
-  # get '/v1/times_record_view', to: 'times_record_view#index', as: 'times_record'
-  # delete '/v1/times_record_delete', to: 'times_record_delete#delete'
-  # get '/v1/times_record/:id/edit', to: 'times_record#edit', as: 'edit_times_record'
-  # patch '/v1/times_record/:id', to: 'times_record#update', as: 'update_times_record'
+  get '/homepage', to: 'homepage#index', as: 'homepage'
+
+  get 'v1/times_record_create', to: 'times_record_create#new', as: 'create_times_record'
+  post 'v1/times_record_create', to: 'times_record_create#create'
+
+
 
   get '/v1/times_record', to: 'times_record_view#index', as: 'times_record'
   delete '/v1/times_record/:id', to: 'times_record_delete#delete', as: 'delete_times_record'

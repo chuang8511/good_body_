@@ -21,7 +21,8 @@ class LoginController < ApplicationController
 
       if login_user.login(password)
         session[:account] = params[:account]
-        render :homepage
+        # render 'homepage/index'
+        redirect_to homepage_path
       end
 
     rescue NoUserError
