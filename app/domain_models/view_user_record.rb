@@ -5,7 +5,6 @@ class ViewUserRecord
   attr_reader :user_account,:user_id,:records
 
   def initialize(user_account)
-    p user_account
     no_user_found!(user_account)
     @user_account=user_account
     @user_id=User.find_by(account:user_account).id
