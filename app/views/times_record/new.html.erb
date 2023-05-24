@@ -2,6 +2,9 @@
 
 <form action="<%= times_record_create_path %>" method="post">
 
+  <%= hidden_field_tag 'record[user_id]', session[:user_id] %>
+
+
 <label for="record_contents">Contents</label>
 <input type="text" id="record_contents" name="record[contents]">
 

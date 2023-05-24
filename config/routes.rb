@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   get '/login', to: 'login#index'
   post '/login', to: 'login#login'
 
+  get '/logout', to: 'logout#logout', as: 'logout'
+
   get '/homepage', to: 'homepage#index', as: 'homepage'
 
   get '/times_record_create', to: 'times_record_create#new', as: 'create_times_record'
   post '/times_record_create', to: 'times_record_create#create'
-
 
 
   get '/times_record', to: 'times_record_view#index', as: 'times_record'

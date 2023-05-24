@@ -1,8 +1,18 @@
+<style>
+  .logout-link {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+</style>
+
 <h1>HomePage</h1>
 
-  <p>Welcome to HomePage</p>
-
-  <%= link_to 'Times Fitness Records', times_record_path %>
+  <%= link_to 'Time Fitness Records', times_record_path %><br>
 
   <%= link_to 'Create a New Times Fitness Record', create_times_record_path %>
+
+  <%= link_to 'Logout', logout_path, method: :get, class: 'logout-link' %>
+
+
 

@@ -17,10 +17,12 @@ class LoginController < ApplicationController
 
     login_user = LoginUser.new(uuid, email)
 
+    user = User.find_by(email: email)
+
     begin
 
       if login_user.login(password)
-        session[:account] = params[:account]
+        session[:user_id] = user.id
         # render 'homepage/index'
         redirect_to homepage_path
       end

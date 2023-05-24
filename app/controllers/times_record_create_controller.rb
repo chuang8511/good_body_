@@ -9,8 +9,11 @@ class TimesRecordCreateController < ApplicationController
     end
 
     def create
+
+        user_id = session[:user_id]
+
         record_time = RecordTimeCreate.new(
-            params[:record][:user_id],
+            user_id,
             params[:record][:contents],
             params[:record][:duration].to_i,
             params[:record][:distance].to_f
