@@ -1,0 +1,42 @@
+<h1>Create a new Set Record</h1>
+
+<% if flash[:error] %>
+  <div class="error">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<%= hidden_field_tag 'record[user_id]', session[:user_id] %>
+
+<%= form_with url: create_sets_record_path, method: :post do |f| %>
+  
+  <div>
+    <%= f.label :contents, 'Content' %>
+    <%= f.text_area :contents %>
+  </div>
+  
+  <div>
+    <%= f.label :sets, 'Sets' %>
+    <%= f.number_field :sets %>
+  </div>
+  
+  <div>
+    <%= f.label :reps, 'Reps' %>
+    <%= f.number_field :reps %>
+  </div>
+  
+  <div>
+    <%= f.label :weight, 'Weight' %>
+    <%= f.number_field :weight %>
+  </div>
+  
+  <div>
+    <%= f.submit 'Create Set Record' %>
+  </div>
+<% end %>

@@ -17,6 +17,8 @@ class LoginController < ApplicationController
 
     login_user = LoginUser.new(uuid, email)
 
+    user = User.find_by(email: email)
+
     if email.blank? || password.blank?
         flash.now[:error] = 'Please fill in all fields.'
         render :new
@@ -26,8 +28,8 @@ class LoginController < ApplicationController
     begin
 
         if login_user.login(password)
-            session[:account] = params[:account]
-            render :create_success
+            session[:user_id] = user.id
+            redirect_to homepage_path
         end
 
     rescue NoUserError

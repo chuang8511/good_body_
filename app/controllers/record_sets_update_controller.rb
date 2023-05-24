@@ -36,7 +36,7 @@ class RecordSetsUpdateController < ApplicationController
             end
 
         rescue NoContentError
-            flash.now[:error] = "#{id}, #{content}, #{set}, #{rep}, #{weight} Record Sets: #{record_sets.inspect}<br>@Record: #{@record.inspect}<br>Content is wrong. Please re-enter your content."
+            flash.now[:error] = "Content is wrong. Please re-enter your content."
             render :edit_record
 
         rescue NoSetError

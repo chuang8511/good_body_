@@ -1,7 +1,9 @@
 class RecordSetsController < ApplicationController
     
     def index
-        @sets_records = SetsRecord.all
+        user_id = session[:user_id]
+        @sets_records = SetsRecord.where(user_id: user_id)
+        
     end
 end
 
