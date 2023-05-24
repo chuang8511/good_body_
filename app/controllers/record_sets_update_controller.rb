@@ -18,9 +18,9 @@ class RecordSetsUpdateController < ApplicationController
         id      = params[:id]
         @record = SetsRecord.find_by(id: id)
         content = params[:contents]
-        set     = params[:sets]
-        rep     = params[:reps]
-        weight  = params[:weight]
+        set     = params[:sets].to_i
+        rep     = params[:reps].to_i
+        weight  = params[:weight].to_f
 
         record_sets = RecordSetsUpdate.new(id, content, set, rep, weight)
 
@@ -29,7 +29,7 @@ class RecordSetsUpdateController < ApplicationController
 
             if record_sets.update_set_record
                 flash[:success] = 'Record updated successfully.'
-                render :index
+                redirect_to set_record_path
             else
                 flash.now[:error] = 'Failed to update record.'
                 render :edit_record

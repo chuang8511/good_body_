@@ -66,7 +66,7 @@
 <div class="wrap">
   <h1>Edit Record</h1>
 
-  <%= form_for @record, url: update_record_path(@record), method: :patch do |f| %>
+  <%= form_with(url: update_record_path(@record), method: :patch, local: true) do |f| %>
     <% if flash[:error].present? %>
       <p class="error"><%= flash[:error] %></p>
     <% end %>
@@ -79,12 +79,13 @@
         <th>Weight</th>
       </tr>
       <tr>
-        <td><%= f.text_field :contents %></td>
-        <td><%= f.number_field :sets %></td>
-        <td><%= f.number_field :reps %></td>
-        <td><%= f.number_field :weight %></td>
+        <td><%= f.text_field :contents, value: @record.contents %></td>
+        <td><%= f.number_field :sets, value: @record.sets %></td>
+        <td><%= f.number_field :reps, value: @record.reps %></td>
+        <td><%= f.number_field :weight, value: @record.weight %></td>
       </tr>
     </table>
     <%= f.submit 'Save' %>
   <% end %>
 </div>
+

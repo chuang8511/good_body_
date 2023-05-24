@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post 'v1/login', to: 'login#login'
   
   # View Page
-  get 'sets_page', to: 'record_sets#index'
+  get 'sets_page', to: 'record_sets#index', as: 'set_record'
 
   # Delete
   delete 'delete_record/:id', to: 'record_sets_delete#delete_record', as: 'delete_record'
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # Update 
   get 'edit_record/:id', to: 'record_sets_update#edit_record', as: 'edit_record'
   patch 'update_record/:id', to: 'record_sets_update#update_record', as: 'update_record'
+
   # patch 'record_sets/:id/update_record', to: 'record_sets_update#update_record', as: 'update_record'
 
 
