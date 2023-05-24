@@ -1,0 +1,23 @@
+<h1>Create Times Fitness Record</h1>
+
+<form action="<%= times_record_create_path %>" method="post">
+
+  <%= hidden_field_tag 'record[user_id]', session[:user_id] %>
+
+
+<label for="record_contents">Contents</label>
+<input type="text" id="record_contents" name="record[contents]">
+
+<label for="record_duration">Duration (min)</label>
+<input type="number" id="record_duration" name="record[duration]">
+
+<label for="record_distance">Distance (m)</label>
+<input type="number" id="record_distance" name="record[distance]">
+
+
+  <input type="submit" value="Create">
+</form>
+
+<% if flash[:error] %>
+  <p><%= flash[:error] %></p>
+<% end %>
