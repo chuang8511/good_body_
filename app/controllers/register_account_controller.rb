@@ -11,6 +11,8 @@ class RegisterAccountController < ApplicationController
         if @register_account_user.create_account
         # 成功
           session[:account] = params[:account]
+          user = User.find_by(account: session[:account] )
+          session[:id] = user.id
           render :show
         else
         # 失敗
