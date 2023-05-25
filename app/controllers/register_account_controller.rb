@@ -28,7 +28,7 @@ class RegisterAccountController < ApplicationController
     end
 
     def update
-        p session[:account] 
+        #p session[:account] 
     end
 
     def update_action
@@ -38,14 +38,11 @@ class RegisterAccountController < ApplicationController
         if (user.nil?)   #testify the existance of the account
           #
         else  #personal info. delivery
-          
-          @weight = info_ident.weight_testify(@weight_modified),
-          @height = info_ident.height_testify(@height_modified),
-          @age =    info_ident.age_testify(@age_modified),
-          @name =   @name_modified,
-          @gender = @gender_modified
-          user.update!(height: @height,weight: @weight,age: params[:age],gender: params[:gender])
-          
+          weight = info_ident.weight_testify(params[:weight_modified].to_i)
+          height = info_ident.height_testify(params[:height_modified].to_i)
+          age =    info_ident.age_testify(params[:age_modified].to_i)
+          gender = params[:gender_modified]
+          user.update!(height: height,weight: weight,age: age,gender: gender)
           render :show
         end
     end
@@ -53,4 +50,9 @@ class RegisterAccountController < ApplicationController
     def wrong_height
       #
     end
+
+    def show
+      #
+    end
+
 end
