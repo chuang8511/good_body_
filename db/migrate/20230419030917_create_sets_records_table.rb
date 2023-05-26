@@ -1,6 +1,6 @@
 class CreateSetsRecordsTable < ActiveRecord::Migration[6.1]
   def change
-    create_table :sets_records, id: false do |t|
+    create_table :sets_records do |t|
       t.integer :user_id
       t.string :contents
       t.integer :sets
