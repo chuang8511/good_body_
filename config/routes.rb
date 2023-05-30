@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   get '/times_record/:id/edit', to: 'times_record_update#edit', as: 'edit_times_record'
   patch '/times_record/:id', to: 'times_record_update#update', as: 'update_times_record'
   
+
+
 end

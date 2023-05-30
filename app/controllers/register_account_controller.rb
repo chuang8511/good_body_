@@ -91,9 +91,9 @@ class RegisterAccountController < ApplicationController
       # friend recomd
       findfriend = RecommendFollow.new()
       friend_recomd = findfriend.recomd( user_id, [4,3,2] )
-      @friend1 = User.find_by(id: friend_recomd[0]).name
-      @friend2 = User.find_by(id: friend_recomd[1]).name
-      @friend3 = User.find_by(id: friend_recomd[2]).name
+      @friend1 = User.find_by(id: friend_recomd[0]).account
+      @friend2 = User.find_by(id: friend_recomd[1]).account
+      @friend3 = User.find_by(id: friend_recomd[2]).account
     end
 
 end
