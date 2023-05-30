@@ -12,7 +12,7 @@ module V1
 
                 user_record = ViewUserRecord.new(params[:user_account])
             
-                JSON.parse(user_record.view)
+                JSON.parse(user_record.to_json.view)
 
                 #回傳的好像沒被視為json?
 

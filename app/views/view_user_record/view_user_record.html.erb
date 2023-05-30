@@ -16,10 +16,9 @@ all.CH {color:#40C080;}
 
 <BR>
 <HR>
+<h1> <%= @account %>'s workout records </h1>
 
-<h1> Your personal profile </h1>
-
-<% @records.each do |record| %>
+<% @record_txt.each do |record| %>
   <%= record %><br>
 <% end %>
 

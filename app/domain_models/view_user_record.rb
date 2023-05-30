@@ -12,7 +12,7 @@ class ViewUserRecord
 
   def view
     records=[]
-    SetsRecord.where(id:user_id).each do |record|
+    SetsRecord.where(user_id:user_id).each do |record|
         records.append( [
             record.created_at,
             record.user_id, 
@@ -23,7 +23,7 @@ class ViewUserRecord
             ] )
     end
 
-    TimesRecord.where(id:user_id).each do |record|
+    TimesRecord.where(user_id:user_id).each do |record|
         records.append( [
             record.created_at,
             record.user_id, 
@@ -34,7 +34,7 @@ class ViewUserRecord
     end
     
     
-    return records.to_json
+    return records
     
   end
 
