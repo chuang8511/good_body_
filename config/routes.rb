@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'logout#logout', as: 'logout'
   
   get '/homepage', to: 'homepage#index', as: 'homepage'
+  post "view", to: "view_user_record#view"
   
   get '/times_record_create', to: 'times_record_create#new', as: 'create_times_record'
   post '/times_record_create', to: 'times_record_create#create'

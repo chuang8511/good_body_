@@ -86,26 +86,11 @@
                 </ul>
             </nav>
             <section>
-                <h2>Friends' New Sport Record</h2>
-                <p><%= @txt1 %></p>
-                <p><%= @txt2 %></p>
-                <p><%= @txt3 %></p>
-            </section>
-            <section>
-                <h2>You may be interested</h2>
+                <h1> <%= @account %>'s workout records </h1>
 
-                <form action="view" method="post">
-                  <button name="account" value=<%= @friend1 %> style="width:50px;height:50px"><%= @friend1 %></button>
-                </form>
-                <br>
-                 <form action="view" method="post">
-                  <button name="account" value=<%= @friend2 %> style="width:50px;height:50px"><%= @friend2 %></button>
-                </form>
-                <br>
-                <form action="view" method="post">
-                  <button name="account" value=<%= @friend3 %> style="width:50px;height:50px"><%= @friend3 %></button>
-                </form>
-
+                <% @record_txt.each do |record| %>
+                <%= record %><br>
+                <% end %>
             </section>
         </div>
         <footer>
@@ -114,3 +99,20 @@
     </div>
 </body>
 </html>
+
+
+<HTML>
+<HEAD>
+<TITLE>Forms Examples</TITLE>
+
+<STYLE TYPE="text/css">
+/* CH class is ColoredHeads */
+all.CH {color:#40C080;}
+</STYLE>
+</HEAD>
+
+<BODY BGCOLOR=white>
+
+<!--
+<H1 CLASS=CH> S&E Notebook </H1>
+-->
