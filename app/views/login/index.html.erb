@@ -20,8 +20,13 @@
     <%= label_tag :password %><br>
     <%= password_field_tag :password %>
   </p>
-  <%= submit_tag "Login" %>
+  <%= submit_tag "Login" %> <br><br>
 <% end %>
+
+<form action="create_account" method="get">
+    <button name="account" value=<%= @friend3 %> > create account </button>
+</form>
+
 <% if flash[:notice] %>
   <p><%= flash[:notice] %></p>
 

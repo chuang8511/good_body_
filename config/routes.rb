@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root to: 'register_account#index'
   post '/submit' => 'register_account#submit'
 
+  get "create_account", to: "register_account#index"
+
   get "home", to: "register_account#show"
   get "personal_profile", to: "register_account#personal_profile"
 
