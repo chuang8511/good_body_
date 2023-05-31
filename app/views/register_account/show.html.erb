@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Good body</title>
+<style>
+    body {
+        font: 14px Arial,sans-serif;
+        margin: 0px;
+    }
+    header {
+        padding: 10px 20px;
+        background: #acb3b9;
+    }
+    header h1 {
+        font-size: 24px;
+    }
+    .container {
+        width: 100%;
+        background: #f2f2f2;
+    }
+    nav, section {
+        float: left;
+        padding: 20px;
+        min-height: 170px;
+        box-sizing: border-box;
+    }
+    section {
+        width: 80%;
+    }
+    nav {
+        width: 20%;           
+        background: #d4d7dc;
+    }  
+    nav ul {
+        list-style: none;
+        line-height: 24px;
+        padding: 0px;
+    }
+    nav ul li a {
+        color: #333;
+    }
+    .clearfix:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    footer {
+        background: #acb3b9;          
+        text-align: center;
+        padding: 5px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> ＧＯＯＤ    ＢＯＤＹ </h1>
+        </header>
+        <div class="wrapper clearfix">
+            <nav>
+                <ul>
+                    <b>  <%= link_to 'Home', home_path, method: :get, class: 'home-link' %> </b> <br>
+                    <%= link_to 'Personal Profile', personal_profile_path, method: :get, class: 'personal_profile-link' %>
+                    <li><a href="https://aftee.tw/"> My Sport Record </a></li>
+                    <li><a href="https://aftee.tw/"> Add New Record </a></li>
+                    <%= link_to 'Log out', logout_path, method: :get, class: 'logout-link' %>
+                    <br>
+                    <br>
+
+   <div class="row">
+    <div class="col-lg-12 mt-5">
+      <div class="mx-auto mt-5" style="width: 400px">
+        <%= form_with(url: view_path, method: 'post', local: true) do %>
+          <div class="form-group">
+            <%= text_field_tag :account, nil, placeholder: 'User', class: 'form-control' %>
+          </div>
+          <%=button_tag 'Search', class: 'btn btn-success btn-block' %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+                </ul>
+            </nav>
+            <section>
+                <h2>Friends' New Sport Record</h2>
+                <p><%= @txt1 %></p>
+                <p><%= @txt2 %></p>
+                <p><%= @txt3 %></p>
+            </section>
+            <section>
+                <h2>You may be interested</h2>
+
+                <form action="view" method="post">
+                  <button name="account" value=<%= @friend1 %> style="width:100px;height:50px"><%= @friend1 %></button>
+                </form>
+                <br>
+                 <form action="view" method="post">
+                  <button name="account" value=<%= @friend2 %> style="width:100px;height:50px"><%= @friend2 %></button>
+                </form>
+                <br>
+                <form action="view" method="post">
+                  <button name="account" value=<%= @friend3 %> style="width:100px;height:50px"><%= @friend3 %></button>
+                </form>
+
+            </section>
+        </div>
+        <footer>
+            <p>www.goodbody.com</p>
+        </footer>
+    </div>
+</body>
+</html>

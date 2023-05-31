@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Good body</title>
+
+<body background="https://media.istockphoto.com/id/1165573327/vector/strong-man-with-heavy-barbell-struggle-doing-exercise.jpg?s=612x612&w=0&k=20&c=UbLr-MYZDNOd-BX2ClP21jFSDtmIFfDLefsT64VCvxo=">
+
+<body>
+<div class="container">
+
+<!-- app/views/register_account/index.html.erb -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 mt-5">
+      <div class="mx-auto mt-5" style="width: 400px">
+        <%= form_with(url: submit_path, method: 'post', local: true) do %>
+          <div class="form-group">
+            <%= label_tag :country, 'Register'%><br>
+            <%= text_field_tag :account, nil, placeholder: 'account', class: 'form-control' %>
+            <%= text_field_tag :password, nil, placeholder: 'password', class: 'form-control' %>
+            <%= text_field_tag :email, nil, placeholder: 'email', class: 'form-control' %>
+            <%= text_field_tag :phone_number, nil, placeholder: 'phone number', class: 'form-control' %>
+            <%= text_field_tag :name, nil, placeholder: 'name', class: 'form-control' %>
+            <%= text_field_tag :gender, nil, placeholder: 'gender', class: 'form-control' %>
+            <%= text_field_tag :age, nil, placeholder: 'age', class: 'form-control' %>
+            <%= text_field_tag :height, nil,  placeholder: 'height', class: 'form-control' %>
+            <%= text_field_tag :weight, nil, placeholder: 'weight', class: 'form-control' %>
+          </div>
+          <%= button_tag 'Create Account', class: 'btn btn-success btn-block' %> <br><br>
+        <% end %>
+
+<form action="login" method="get">
+    <button name="account" value=<%= @friend3 %> > already have an account </button>
+</form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,6 @@ module V1
                     {
                         test: params[:test_id],
                         context: 'It is a false context'
-
                     }
 
                 end
