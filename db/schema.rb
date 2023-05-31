@@ -45,8 +45,9 @@ ActiveRecord::Schema.define(version: 2023_04_20_055827) do
     t.integer "user_id"
     t.string "contents"
     t.integer "duration"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "distance"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
   end
 
   create_table "untitled_table", id: :integer, default: nil, force: :cascade do |t|

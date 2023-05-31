@@ -62,10 +62,10 @@
         <div class="wrapper clearfix">
             <nav>
                 <ul>
-                    <li><a href="http://127.0.0.1:3000/home"> Home </a></li>
-                    <li><a href="http://127.0.0.1:3000/personal_profile"> <b>Personal Profile</b> </a></li>
-                    <li><a href="http://c.biancheng.net/html/"> My Sport Record </a></li>
-                    <li><a href="http://c.biancheng.net/css3/"> Add New Record </a></li>
+                    <%= link_to 'Home', home_path, method: :get, class: 'home-link' %><br>
+                    <b>  <%= link_to 'Personal Profile', personal_profile_path, method: :get, class: 'personal_profile-link' %> </b>
+                    <li><a href="https://aftee.tw/"> My Sport Record </a></li>
+                    <li><a href="https://aftee.tw/"> Add New Record </a></li>
                     <%= link_to 'Log out', logout_path, method: :get, class: 'logout-link' %>
                     <br>
                     <br>
