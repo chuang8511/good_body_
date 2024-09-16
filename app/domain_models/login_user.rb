@@ -22,7 +22,7 @@ class LoginUser
   end
 
   def password_is_wrong!(password)
-    raise WrongPasswordError.new if user.password != password # I do not consider the security here. Please think about how to make it better.
+    raise WrongPasswordError.new if user.password != password #I do not consider the security here. Please think about how to make it better.
   end
 
   def succeed_to_login
